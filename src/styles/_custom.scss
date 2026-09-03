@@ -1,0 +1,443 @@
+// Regras próprias do rebrand Cassfrei-SIGT, adicionadas por cima do SCSS herdado do template
+// (que trata do grid, secções, botões, etc.). Mantido num ficheiro à parte para não misturar
+// com o SCSS de origem do template durante futuras comparações/actualizações.
+
+.brand-logo {
+	display: inline-flex;
+	align-items: center;
+	text-decoration: none;
+	line-height: 1.1;
+	margin-right: 20px;
+
+	&__img {
+		height: 42px;
+		width: auto;
+		display: block;
+	}
+
+	&--footer {
+		margin-right: 0;
+	}
+
+	&--footer &__img {
+		height: 48px;
+	}
+
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+// Foto simples da secção "Sobre Nós" da Home — título/subtítulo centrados por cima,
+// depois foto à esquerda e texto à direita, sem a moldura com sombra que o template
+// original usava (".wrap-about-border"), para um layout mais limpo.
+.about-photo {
+	min-height: 300px;
+	height: 100%;
+	border-radius: 8px;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	@include media-breakpoint-up(md) {
+		min-height: 380px;
+	}
+}
+
+// Cartões de valores/serviços/projectos/posts — pequenos ajustes que o template original
+// não previa (badges de estatística, meta de projecto, listas de instituições, etc.)
+.value-card {
+	text-align: center;
+	padding: 30px 20px;
+	height: 100%;
+	background: $white;
+	border-radius: 4px;
+	box-shadow: 0px 5px 18px -9px rgba(0, 0, 0, .14);
+	@include transition(.3s);
+
+	&:hover {
+		transform: translateY(-4px);
+		box-shadow: 0px 12px 28px -10px rgba(0, 0, 0, .22);
+
+		.icon {
+			background: $primary;
+			color: $white;
+		}
+	}
+
+	.icon {
+		width: 70px;
+		height: 70px;
+		margin: 0 auto 20px;
+		border-radius: 50%;
+		background: rgba($primary, .1);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 28px;
+		color: $primary;
+		@include transition(.3s);
+	}
+
+	h3 {
+		font-size: 20px;
+		margin-bottom: 12px;
+	}
+}
+
+.institutions-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+
+	li {
+		display: flex;
+		gap: 16px;
+		padding: 14px 12px;
+		border-bottom: 1px solid rgba($black, .08);
+		@include transition(.2s);
+
+		&:hover {
+			background: rgba($primary, .04);
+		}
+
+		&:last-child {
+			border-bottom: none;
+		}
+
+		@include media-breakpoint-down(sm) {
+			flex-direction: column;
+			gap: 4px;
+		}
+	}
+
+	.period {
+		flex: 0 0 auto;
+		min-width: 110px;
+		font-weight: 700;
+		color: $primary;
+	}
+}
+
+.project-stats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+	margin: 30px 0;
+
+	.stat {
+		flex: 1 1 110px;
+		background: $white;
+		border-radius: 8px;
+		padding: 16px;
+		text-align: center;
+		box-shadow: 0px 5px 18px -9px rgba(0, 0, 0, .14);
+		@include transition(.3s);
+
+		&:hover {
+			transform: translateY(-3px);
+			box-shadow: 0px 12px 28px -10px rgba(0, 0, 0, .2);
+		}
+
+		strong {
+			display: block;
+			font-size: 22px;
+			color: $primary;
+		}
+
+		span {
+			font-size: 13px;
+			color: $tertiary;
+		}
+	}
+}
+
+.project-meta {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 30px;
+	background: $white;
+	box-shadow: 0px 5px 18px -9px rgba(0, 0, 0, .14);
+	border-radius: 4px;
+	padding: 8px 20px;
+
+	li {
+		padding: 10px 0;
+		border-bottom: 1px solid rgba($black, .08);
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px 12px;
+
+		&:last-child {
+			border-bottom: none;
+		}
+
+		strong {
+			display: inline-block;
+			min-width: 130px;
+			color: $primary;
+		}
+	}
+}
+
+// O template original só aplicava cor e peso ao texto do hero através do selector composto
+// ".owl-carousel.home-slider .slider-text h1" — como o plugin Owl Carousel (jQuery) foi
+// removido e a classe "owl-carousel" já não está na marcação, essa regra deixou de encontrar
+// correspondência. Sem ela, o título caía na regra global "h1{font-weight:400}" — fino,
+// nada "bold". Repor aqui, com o peso e tamanho do template original (bold normal, sem
+// letter-spacing apertado, que ficava pesado a mais).
+.home-slider .slider-item .slider-text {
+	h1 {
+		color: $white;
+		font-weight: 700;
+		font-size: 56px;
+		line-height: 1.2;
+
+		@include media-breakpoint-down(md) {
+			font-size: 36px;
+		}
+	}
+
+	.subheading {
+		color: $secondary;
+	}
+
+	p {
+		color: rgba(255, 255, 255, .9);
+	}
+}
+
+// Setas de navegação manual do slide (duas imagens em rotação automática) — quadrados
+// com contorno simples sobre a foto, à direita, verticalmente centrados.
+.slider-arrows {
+	position: absolute;
+	right: 30px;
+	bottom: 40px;
+	z-index: 2;
+	display: flex;
+	gap: 10px;
+
+	@include media-breakpoint-down(sm) {
+		display: none;
+	}
+
+	button {
+		width: 42px;
+		height: 42px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: transparent;
+		border: 1px solid rgba($white, .6);
+		color: $white;
+		font-size: 18px;
+		cursor: pointer;
+		@include transition(.2s);
+
+		&:hover {
+			background: $primary;
+			border-color: $primary;
+		}
+	}
+}
+
+// Placeholder de imagem para projectos/posts sem fotografia real ainda (ver PlaceholderMedia.jsx)
+.placeholder-media {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	min-height: 220px;
+	@include gradient-background();
+
+	span {
+		font-size: 56px;
+		color: rgba($white, .5);
+	}
+
+	&--inline {
+		position: relative;
+		height: 320px;
+		border-radius: 4px;
+	}
+}
+
+.mailto-fallback {
+	font-size: 14px;
+	color: $tertiary;
+
+	a {
+		color: $primary;
+	}
+}
+
+// Estado activo do menu, aplicado via NavLink do React Router (substitui a marcação
+// manual "nav-item active" que o template original repetia à mão em cada página).
+.ftco-navbar-light .navbar-nav .nav-link.is-active {
+	color: $primary;
+}
+
+// Hero a ocupar toda a viewport — o template original definia a altura (600px) só dentro
+// do selector composto ".owl-carousel.home-slider", que deixou de existir quando o plugin
+// jQuery Owl Carousel foi removido. Repor aqui, já como altura de viewport completa.
+//
+// Transição entre slides: em vez de trocar a imagem de fundo de um único elemento (o que
+// dava um corte instantâneo, sem transição real), os slides ficam todos lado a lado numa
+// faixa ("slider-track") que desliza horizontalmente via transform — um slide empurra o
+// outro para fora do ecrã, como num carrossel clássico, sem depender de jQuery/Owl Carousel.
+.home-slider {
+	position: relative;
+	min-height: 100vh;
+	overflow: hidden;
+
+	.slider-track {
+		display: flex;
+		height: 100vh;
+		transition: transform .7s ease;
+	}
+
+	// O template original só definia estas três propriedades dentro do selector morto
+	// ".owl-carousel.home-slider" — sem elas, o CSS por omissão do browser é
+	// "background-repeat: repeat", pelo que a foto ficava a repetir em vez de cobrir
+	// a secção inteira. Repor aqui, sem depender do Owl Carousel.
+	//
+	// O texto (dentro de ".container") tem de ser centrado verticalmente pelo próprio
+	// ".slider-item" (display:flex + align-items:center) — um "height:100%" no
+	// ".slider-text" não chega, porque o pai directo (".container") não tem altura
+	// definida, e uma percentagem sobre um pai com altura "auto" não produz efeito algum.
+	.slider-item {
+		position: relative;
+		flex: 0 0 100%;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center center;
+
+		> .container {
+			width: 100%;
+		}
+	}
+
+	// Mesmo motivo do bloco de cor do texto em cima: o template original só escurecia a foto
+	// de fundo do hero através do selector composto ".owl-carousel.home-slider .overlay",
+	// que deixou de encontrar correspondência. Repor aqui — opacidade um pouco mais alta que
+	// o original (.3) porque as fotografias reais têm céus/paredes claras onde o texto branco
+	// perderia legibilidade sem mais contraste.
+	.overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: $black;
+		opacity: .45;
+	}
+
+	@include media-breakpoint-down(sm) {
+		min-height: 80vh;
+
+		.slider-track {
+			height: 80vh;
+		}
+	}
+}
+
+// Menu branco de faixa única (a antiga barra de contactos por cima do menu foi
+// removida). O CTA "Fale Connosco" fica encostado à margem direita da janela, a toda
+// a altura da nav — por isso a nav precisa de position:relative e o CTA de position:
+// absolute, em vez de participar do fluxo flex normal do ".container".
+// Menu fixo: acompanha o scroll em vez de desaparecer para trás do hero. "sticky" em vez
+// de "fixed" porque não precisa de compensação de padding no <body> — o menu simplesmente
+// deixa de rolar assim que atinge o topo da janela.
+.ftco-navbar-light {
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+	box-shadow: 0 2px 12px -6px rgba(0, 0, 0, .15);
+
+	.container {
+		@include media-breakpoint-up(lg) {
+			padding-right: 200px;
+		}
+
+		@include media-breakpoint-down(md) {
+			padding-right: 64px;
+		}
+	}
+
+	// Botão de menu em mobile/tablet: quadrado azul a toda a altura da barra do menu (mesmo
+	// tratamento do CTA "Fale Connosco" em desktop), em vez do ícone solto sobre fundo
+	// branco — mais fácil de bater com o dedo e consistente com a aba do CTA. Altura fixa
+	// (não "bottom:0") para se manter sempre um quadrado, mesmo quando o menu abre e a nav
+	// cresce para acomodar a lista de links por baixo.
+	.navbar-toggler {
+		@include media-breakpoint-down(md) {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 64px;
+			height: 64px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: $primary;
+			border-radius: 0;
+			padding: 0;
+
+			span {
+				color: $white !important;
+				font-size: 22px;
+			}
+		}
+	}
+}
+
+.navbar-cta {
+	display: none;
+
+	@include media-breakpoint-up(lg) {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		padding: 0 30px;
+		background: $primary;
+		color: $white;
+		font-weight: 700;
+		font-size: 14px;
+		white-space: nowrap;
+		text-decoration: none;
+
+		span {
+			transition: transform .2s ease;
+		}
+
+		&:hover,
+		&:focus {
+			background: darken($primary, 8%);
+			color: $white;
+			text-decoration: none;
+
+			span {
+				transform: translateX(3px);
+			}
+		}
+	}
+}
+
+// Em ecrãs pequenos a aba fixa não cabe — o CTA entra na lista do menu, junto aos links.
+.navbar-cta-mobile {
+	display: block;
+	margin-top: 10px;
+
+	@include media-breakpoint-up(lg) {
+		display: none;
+	}
+}
