@@ -26,7 +26,7 @@ function Contactos() {
 
       <section className="ftco-section ftco-no-pb ftco-no-pt">
         <div className="container-fluid px-0">
-          <div className="row justify-content-center">
+          <div className="row no-gutters justify-content-center">
             <div className="col-md-12">
               <MapEmbed />
             </div>

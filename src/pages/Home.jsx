@@ -183,7 +183,7 @@ function Home() {
               </div>
             ))}
           </div>
-          <div className="row justify-content-center mt-4 mb-5">
+          <div className="row no-gutters justify-content-center mt-4 mb-5">
             <Link to="/projectos" className="btn btn-primary px-4 py-2">Ver Todos os Projectos</Link>
           </div>
         </div>

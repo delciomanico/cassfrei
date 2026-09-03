@@ -286,15 +286,28 @@
 // dava um corte instantâneo, sem transição real), os slides ficam todos lado a lado numa
 // faixa ("slider-track") que desliza horizontalmente via transform — um slide empurra o
 // outro para fora do ecrã, como num carrossel clássico, sem depender de jQuery/Owl Carousel.
+// A altura é "100vh menos a altura do menu" (e não 100vh cheios) porque o menu está em
+// fluxo normal por cima do hero (não sobreposto) — hero + menu preenchem exactamente um
+// ecrã, sem sobrar espaço a mais (que obrigaria a um scroll mínimo) nem a menos.
+// 62px/64px correspondem à altura real medida do menu (".ftco-navbar-light") em cada
+// breakpoint — ajustar aqui também se o conteúdo do menu mudar de altura.
 .home-slider {
 	position: relative;
-	min-height: 100vh;
+	min-height: calc(100vh - 62px);
 	overflow: hidden;
+
+	@include media-breakpoint-up(lg) {
+		min-height: calc(100vh - 64px);
+	}
 
 	.slider-track {
 		display: flex;
-		height: 100vh;
+		height: calc(100vh - 62px);
 		transition: transform .7s ease;
+
+		@include media-breakpoint-up(lg) {
+			height: calc(100vh - 64px);
+		}
 	}
 
 	// O template original só definia estas três propriedades dentro do selector morto
@@ -337,13 +350,6 @@
 		opacity: .45;
 	}
 
-	@include media-breakpoint-down(sm) {
-		min-height: 80vh;
-
-		.slider-track {
-			height: 80vh;
-		}
-	}
 }
 
 // Menu branco de faixa única (a antiga barra de contactos por cima do menu foi
