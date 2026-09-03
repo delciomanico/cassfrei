@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import Seo from '../components/Seo.jsx'
 import ValueCard from '../components/ValueCard.jsx'
 import ServiceCard from '../components/ServiceCard.jsx'
 import ProjectCard from '../components/ProjectCard.jsx'
@@ -41,6 +42,12 @@ function Home() {
 
   return (
     <>
+      <Seo
+        raw
+        title="Cassfrei-SIGT, Lda — Engenharia, Geologia, Cadastro Predial e SIG | Luanda, Angola"
+        description="Cassfrei-SIGT, Lda é uma empresa angolana de consultoria em Engenharia, Geologia e Arquitectura, especialista em Cadastro Predial, Cartografia, Planeamento Urbano e Sistemas de Informação Geográfica (SIG) em Luanda, Angola."
+        path="/"
+      />
       <section className="home-slider">
         <div className="slider-track" style={{ transform: `translateX(-${current * 100}%)` }}>
           {slides.map((slide) => (

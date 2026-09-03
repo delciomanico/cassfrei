@@ -1,10 +1,18 @@
 import PageHeader from '../components/PageHeader.jsx'
+import Seo from '../components/Seo.jsx'
 import ProjectCard from '../components/ProjectCard.jsx'
 import projects from '../data/projects.js'
+import { breadcrumbJsonLd } from '../lib/seo.js'
 
 function Projectos() {
   return (
     <>
+      <Seo
+        title="Projectos"
+        description="Conheça os projectos de referência da Cassfrei-SIGT em Cadastro, Cartografia e Gestão Territorial, desenvolvidos com instituições públicas e privadas em Angola."
+        path="/projectos"
+        jsonLd={breadcrumbJsonLd([{ name: 'Início', path: '/' }, { name: 'Projectos', path: '/projectos' }])}
+      />
       <PageHeader title="Projectos" />
 
       <section className="ftco-section">

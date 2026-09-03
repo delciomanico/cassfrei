@@ -1,11 +1,19 @@
 import PageHeader from '../components/PageHeader.jsx'
+import Seo from '../components/Seo.jsx'
 import ContactInfo from '../components/ContactInfo.jsx'
 import ContactForm from '../components/ContactForm.jsx'
 import MapEmbed from '../components/MapEmbed.jsx'
+import { breadcrumbJsonLd } from '../lib/seo.js'
 
 function Contactos() {
   return (
     <>
+      <Seo
+        title="Contactos"
+        description="Contacte a Cassfrei-SIGT, Lda em Luanda, Angola. Telefone, email e morada para pedidos de orçamento em Cadastro, Cartografia e Consultoria em Engenharia e Geologia."
+        path="/contactos"
+        jsonLd={breadcrumbJsonLd([{ name: 'Início', path: '/' }, { name: 'Contactos', path: '/contactos' }])}
+      />
       <PageHeader title="Contactos" />
 
       <section className="ftco-section contact-section">

@@ -1,7 +1,9 @@
 import { Link, useParams } from 'react-router-dom'
 import PageHeader from '../components/PageHeader.jsx'
 import PlaceholderMedia from '../components/PlaceholderMedia.jsx'
+import Seo from '../components/Seo.jsx'
 import projects from '../data/projects.js'
+import { breadcrumbJsonLd } from '../lib/seo.js'
 
 function ProjectoDetail() {
   const { slug } = useParams()
@@ -10,6 +12,7 @@ function ProjectoDetail() {
   if (!project) {
     return (
       <>
+        <Seo title="Projecto Não Encontrado" description="Não encontrámos o projecto que procura." path={`/projectos/${slug || ''}`} noindex />
         <PageHeader title="Projecto não encontrado" />
         <section className="ftco-section">
           <div className="container text-center">
@@ -23,6 +26,17 @@ function ProjectoDetail() {
 
   return (
     <>
+      <Seo
+        title={project.title}
+        description={project.summary}
+        path={`/projectos/${project.slug}`}
+        image={project.placeholder ? undefined : project.image}
+        jsonLd={breadcrumbJsonLd([
+          { name: 'Início', path: '/' },
+          { name: 'Projectos', path: '/projectos' },
+          { name: project.title, path: `/projectos/${project.slug}` },
+        ])}
+      />
       <PageHeader title={project.title} />
 
       <section className="ftco-section">

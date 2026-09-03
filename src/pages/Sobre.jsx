@@ -1,14 +1,22 @@
 import PageHeader from '../components/PageHeader.jsx'
+import Seo from '../components/Seo.jsx'
 import ValueCard from '../components/ValueCard.jsx'
 import Counter from '../components/Counter.jsx'
 import values from '../data/values.js'
 import { publicClients, privateClients } from '../data/clients.js'
+import { breadcrumbJsonLd } from '../lib/seo.js'
 
 function Sobre() {
   const yearsActive = new Date().getFullYear() - 2013
 
   return (
     <>
+      <Seo
+        title="Sobre Nós"
+        description="Conheça a Cassfrei-SIGT, Lda: mais de uma década de experiência em Cadastro Predial, Cartografia Geológica, Planeamento Urbano e Sistemas de Informação Geográfica em Angola."
+        path="/sobre"
+        jsonLd={breadcrumbJsonLd([{ name: 'Início', path: '/' }, { name: 'Sobre Nós', path: '/sobre' }])}
+      />
       <PageHeader title="Sobre Nós" />
 
       <section className="ftco-section">

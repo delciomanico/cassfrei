@@ -1,10 +1,40 @@
 import PageHeader from '../components/PageHeader.jsx'
+import Seo from '../components/Seo.jsx'
 import ServiceCard from '../components/ServiceCard.jsx'
 import { consultoriaServices, estudosServices } from '../data/services.js'
+import { breadcrumbJsonLd, absoluteUrl } from '../lib/seo.js'
+
+const allServices = [...consultoriaServices, ...estudosServices]
+
+const servicesJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: allServices.map((service, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    item: {
+      '@type': 'Service',
+      name: service.title,
+      description: service.text,
+      provider: { '@type': 'ProfessionalService', name: 'Cassfrei-SIGT, Lda' },
+      areaServed: { '@type': 'Country', name: 'Angola' },
+      url: absoluteUrl('/o-que-fazemos'),
+    },
+  })),
+}
 
 function Servicos() {
   return (
     <>
+      <Seo
+        title="O Que Fazemos"
+        description="Serviços de Cadastro Predial e Urbano, Cadastro Fiscal, Cartografia, Análise de Geo-riscos, Toponímia e Sistemas de Informação Geográfica (SIG) para instituições públicas e privadas em Angola."
+        path="/o-que-fazemos"
+        jsonLd={[
+          breadcrumbJsonLd([{ name: 'Início', path: '/' }, { name: 'O Que Fazemos', path: '/o-que-fazemos' }]),
+          servicesJsonLd,
+        ]}
+      />
       <PageHeader title="O Que Fazemos" />
 
       <section className="ftco-section ftco-no-pb">

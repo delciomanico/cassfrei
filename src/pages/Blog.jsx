@@ -1,10 +1,18 @@
 import PageHeader from '../components/PageHeader.jsx'
+import Seo from '../components/Seo.jsx'
 import BlogCard from '../components/BlogCard.jsx'
 import posts from '../data/posts.js'
+import { breadcrumbJsonLd } from '../lib/seo.js'
 
 function Blog() {
   return (
     <>
+      <Seo
+        title="Blog"
+        description="Artigos e novidades da Cassfrei-SIGT sobre Engenharia, Geologia, Cadastro Predial e Sistemas de Informação Geográfica em Angola."
+        path="/blog"
+        jsonLd={breadcrumbJsonLd([{ name: 'Início', path: '/' }, { name: 'Blog', path: '/blog' }])}
+      />
       <PageHeader title="Blog" />
 
       <section className="ftco-section bg-light">
