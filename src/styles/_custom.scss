@@ -180,16 +180,10 @@
 	}
 }
 
-// O template original só aplicava cor e peso ao texto do hero através do selector composto
-// ".owl-carousel.home-slider .slider-text h1" — como o plugin Owl Carousel (jQuery) foi
-// removido e a classe "owl-carousel" já não está na marcação, essa regra deixou de encontrar
-// correspondência. Sem ela, o título caía na regra global "h1{font-weight:400}" — fino,
-// nada "bold". Repor aqui, com o peso e tamanho do template original (bold normal, sem
-// letter-spacing apertado, que ficava pesado a mais).
 .home-slider .slider-item .slider-text {
 	h1 {
 		color: $white;
-		font-weight: 700;
+		font-weight: 300;
 		font-size: 56px;
 		line-height: 1.2;
 
@@ -207,36 +201,37 @@
 	}
 }
 
-// Setas de navegação manual do slide (duas imagens em rotação automática) — quadrados
-// com contorno simples sobre a foto, à direita, verticalmente centrados.
-.slider-arrows {
+// Indicadores de slide (pontinhos) do hero — centrados horizontalmente, por cima da faixa
+// que faz o cross-fade (ver ".slider-item" mais abaixo). O activo fica maior e preenchido.
+.slider-dots {
 	position: absolute;
-	right: 30px;
-	bottom: 40px;
-	z-index: 2;
+	left: 0;
+	right: 0;
+	bottom: 24px;
+	z-index: 3;
 	display: flex;
+	justify-content: center;
 	gap: 10px;
 
-	@include media-breakpoint-down(sm) {
-		display: none;
-	}
-
-	button {
-		width: 42px;
-		height: 42px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background: transparent;
-		border: 1px solid rgba($white, .6);
-		color: $white;
-		font-size: 18px;
+	.slider-dot {
+		width: 10px;
+		height: 10px;
+		padding: 0;
+		border-radius: 50%;
+		background: rgba($white, .5);
+		border: 1px solid rgba($white, .8);
 		cursor: pointer;
 		@include transition(.2s);
 
 		&:hover {
-			background: $primary;
-			border-color: $primary;
+			background: rgba($white, .8);
+		}
+
+		&.is-active {
+			width: 12px;
+			height: 12px;
+			background: $secondary;
+			border-color: $secondary;
 		}
 	}
 }
@@ -261,6 +256,164 @@
 		height: 320px;
 		border-radius: 4px;
 	}
+
+	&--formacao {
+		position: relative;
+		height: 100%;
+
+		span {
+			font-size: 40px;
+		}
+	}
+}
+
+// Cartão de formação — reaproveita ".value-card", mas troca o ícone circular por uma foto
+// (ver FormacaoCard.jsx) que sangra até às bordas do cartão. Como ".value-card" já tem
+// padding uniforme (30px/20px) e "border-radius", a foto usa margens negativas para chegar
+// às bordas, e o "overflow:hidden" no cartão corta os cantos da foto para seguirem o
+// arredondamento do próprio cartão, em vez de precisar de um "border-radius" à parte.
+.formacao-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 0;
+	overflow: hidden;
+
+	&__image {
+		width: calc(100% + 40px);
+		height: 160px;
+		margin: 0 -20px 20px;
+		background-size: cover;
+		background-position: center center;
+		background-repeat: no-repeat;
+		flex-shrink: 0;
+	}
+
+	.formacao-modality {
+		font-size: 13px;
+		color: $tertiary;
+		text-transform: uppercase;
+		letter-spacing: .04em;
+		margin-bottom: 12px;
+	}
+}
+
+.badge-vagas {
+	display: inline-block;
+	padding: 5px 14px;
+	border-radius: 20px;
+	font-size: 12px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: .03em;
+
+	&--aberta {
+		background: rgba($secondary, .18);
+		color: darken($secondary, 35%);
+	}
+
+	&--fechada {
+		background: rgba($tertiary, .12);
+		color: $tertiary;
+	}
+}
+
+// Botão desactivado (inscrições encerradas) — mantém o visual de "btn-primary" mas sem convidar ao clique.
+.formacao-card .btn:disabled {
+	opacity: .5;
+	cursor: not-allowed;
+
+	&:hover {
+		background: $primary;
+		border-color: $primary;
+	}
+}
+
+// ".gallery" (grid + hover-icon) já vem do template; falta só o cursor, já que agora é uma div
+// com role="button" (sem lightbox jQuery) em vez do <a> original.
+.gallery {
+	cursor: pointer;
+}
+
+// Lightbox simples da Galeria (sem dependência de jQuery/magnific-popup — ver GalleryLightbox.jsx).
+.lightbox-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 2000;
+	background: rgba($black, .92);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+}
+
+.lightbox-content {
+	max-width: 90vw;
+	max-height: 85vh;
+	margin: 0;
+	text-align: center;
+
+	img {
+		max-width: 100%;
+		max-height: 75vh;
+		border-radius: 4px;
+		box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
+	}
+
+	figcaption {
+		color: rgba($white, .85);
+		margin-top: 16px;
+		font-size: 14px;
+	}
+}
+
+.lightbox-close,
+.lightbox-nav {
+	position: absolute;
+	background: transparent;
+	border: 1px solid rgba($white, .5);
+	color: $white;
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 18px;
+	cursor: pointer;
+	@include transition(.2s);
+
+	&:hover {
+		background: $primary;
+		border-color: $primary;
+	}
+}
+
+.lightbox-close {
+	top: 20px;
+	right: 20px;
+}
+
+.lightbox-nav {
+	top: 50%;
+	transform: translateY(-50%);
+
+	&--prev {
+		left: 20px;
+	}
+
+	&--next {
+		right: 20px;
+	}
+
+	@include media-breakpoint-down(sm) {
+		width: 36px;
+		height: 36px;
+		font-size: 15px;
+	}
 }
 
 .mailto-fallback {
@@ -282,10 +435,10 @@
 // do selector composto ".owl-carousel.home-slider", que deixou de existir quando o plugin
 // jQuery Owl Carousel foi removido. Repor aqui, já como altura de viewport completa.
 //
-// Transição entre slides: em vez de trocar a imagem de fundo de um único elemento (o que
-// dava um corte instantâneo, sem transição real), os slides ficam todos lado a lado numa
-// faixa ("slider-track") que desliza horizontalmente via transform — um slide empurra o
-// outro para fora do ecrã, como num carrossel clássico, sem depender de jQuery/Owl Carousel.
+// Transição entre slides: cross-fade — todos os slides ficam sobrepostos exactamente no
+// mesmo lugar ("slider-item" com position:absolute) e só a opacidade muda; o slide activo
+// ("is-active") sobe para opacity:1 e para cima na pilha (z-index), os restantes ficam a 0
+// por baixo. Mais suave que o slide horizontal anterior, sem depender de jQuery/Owl Carousel.
 // A altura é "100vh menos a altura do menu" (e não 100vh cheios) porque o menu está em
 // fluxo normal por cima do hero (não sobreposto) — hero + menu preenchem exactamente um
 // ecrã, sem sobrar espaço a mais (que obrigaria a um scroll mínimo) nem a menos.
@@ -301,9 +454,8 @@
 	}
 
 	.slider-track {
-		display: flex;
+		position: relative;
 		height: calc(100vh - 62px);
-		transition: transform .7s ease;
 
 		@include media-breakpoint-up(lg) {
 			height: calc(100vh - 64px);
@@ -320,8 +472,8 @@
 	// ".slider-text" não chega, porque o pai directo (".container") não tem altura
 	// definida, e uma percentagem sobre um pai com altura "auto" não produz efeito algum.
 	.slider-item {
-		position: relative;
-		flex: 0 0 100%;
+		position: absolute;
+		inset: 0;
 		width: 100%;
 		height: 100%;
 		display: flex;
@@ -329,6 +481,14 @@
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: center center;
+		opacity: 0;
+		z-index: 1;
+		transition: opacity 1.2s ease;
+
+		&.is-active {
+			opacity: 1;
+			z-index: 2;
+		}
 
 		> .container {
 			width: 100%;
@@ -445,5 +605,94 @@
 
 	@include media-breakpoint-up(lg) {
 		display: none;
+	}
+}
+
+// O template original suprime "outline" com "!important" em vários pontos (links, botões,
+// setas do carousel, inputs — ver main.scss), o que deixa a navegação por teclado sem
+// qualquer indicação visual de onde está o foco. Repor aqui, mas só para foco por teclado
+// (":focus-visible"), para não introduzir um anel visível em cliques de rato/touch.
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+	outline: 2px solid $primary !important;
+	outline-offset: 2px;
+}
+
+// Cartão de embed do Instagram/Facebook no Blog (ver SocialEmbed.jsx) — os widgets oficiais já
+// trazem o seu próprio "chrome" visual, aqui só centramos e damos alguma respiração ao redor.
+.social-embed-card {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+
+	iframe {
+		max-width: 100%;
+	}
+}
+
+.social-embed-facebook {
+	width: 100%;
+	max-width: 500px;
+	display: flex;
+	justify-content: center;
+}
+
+// Ícones trocados de fonte de ícones (icomoon/flaticon, datados) para lucide-react (SVG) —
+// ver ServiceCard/ValueCard/FormacaoCard/Counter/ContactInfo/Footer/ProjectCard/Galeria. A
+// maioria herda a cor automaticamente (SVG "currentColor" segue o "color" do CSS), mas o
+// template original definia a cor só no "span" do ícone antigo — repor aqui onde esse "span"
+// deixou de existir.
+.services .icon,
+.services-2 .icon {
+	color: $primary;
+}
+.services.active .icon,
+.services:hover .icon,
+.services-2:hover .icon {
+	color: $white;
+}
+.ftco-counter .icon {
+	color: $black;
+	line-height: 1;
+}
+.project .btn-site {
+	color: $black;
+}
+
+// Os números de impacto (instituições servidas, anos de actuação) são a prova social mais
+// forte que a empresa tem — mereciam mais peso visual do que o resto do texto à sua volta.
+// O template original tratava-os a 40px/preto, ao mesmo nível de qualquer outro número da
+// página. Reforçar tamanho e usar a cor da marca para que se destaquem primeiro à vista.
+.ftco-counter .text strong.number {
+	font-size: 52px;
+	color: $primary;
+}
+
+// Título/cliente dos "/projectos" vinham com "opacity:0" por omissão (ver ".project .text" em
+// main.scss) — só ficavam visíveis ao passar o rato, herdado de um grid de portefólio
+// "hover to reveal". Isso deixa a grelha sem nenhum rótulo visível até o utilizador adivinhar
+// que deve passar o rato — mau para descoberta, e pior ainda em ecrãs sem hover (touch) fora
+// do que o breakpoint "sm" do template já cobria. Tornar sempre visível, ancorado ao fundo do
+// azulejo com um gradiente por trás para garantir legibilidade sobre fotos claras; o hover
+// continua a intensificar o overlay azul e a revelar a seta, como reforço visual extra.
+.project {
+	cursor: pointer;
+}
+.project .text {
+	opacity: 1;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 20px;
+	background: linear-gradient(to top, rgba($black, .8) 0%, rgba($black, 0) 100%);
+
+	h3 {
+		font-size: 20px;
+		color: $white;
 	}
 }

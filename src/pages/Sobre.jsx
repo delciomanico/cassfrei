@@ -1,3 +1,4 @@
+import { Landmark, Briefcase, Map, CalendarDays, User } from 'lucide-react'
 import PageHeader from '../components/PageHeader.jsx'
 import Seo from '../components/Seo.jsx'
 import ValueCard from '../components/ValueCard.jsx'
@@ -72,10 +73,10 @@ function Sobre() {
           <div className="row d-md-flex align-items-center justify-content-center">
             <div className="wrapper">
               <div className="row d-md-flex align-items-center">
-                <Counter icon="icon-institution" target={7} label="Instituições Públicas Servidas" />
-                <Counter icon="icon-briefcase" target={6} label="Instituições Privadas Servidas" />
-                <Counter icon="icon-map" target={7} label="Projectos de Referência" />
-                <Counter icon="icon-calendar" target={yearsActive} label="Anos de Actuação" />
+                <Counter icon={Landmark} target={7} label="Instituições Públicas Servidas" />
+                <Counter icon={Briefcase} target={6} label="Instituições Privadas Servidas" />
+                <Counter icon={Map} target={7} label="Projectos de Referência" />
+                <Counter icon={CalendarDays} target={yearsActive} label="Anos de Actuação" />
               </div>
             </div>
           </div>
@@ -127,7 +128,7 @@ function Sobre() {
           <div className="row justify-content-center">
             <div className="col-md-5 text-center mb-4">
               <div className="icon mx-auto mb-3 d-flex align-items-center justify-content-center" style={{ width: 80, height: 80, borderRadius: '50%', background: 'rgba(30,111,217,.1)' }}>
-                <span className="icon-user" style={{ fontSize: 32, color: '#1e6fd9' }}></span>
+                <User size={32} strokeWidth={1.75} color="#1e6fd9" />
               </div>
               <h3>Nadine Guimarães</h3>
               <p className="mb-1">Geóloga</p>
@@ -135,7 +136,7 @@ function Sobre() {
             </div>
             <div className="col-md-5 text-center mb-4">
               <div className="icon mx-auto mb-3 d-flex align-items-center justify-content-center" style={{ width: 80, height: 80, borderRadius: '50%', background: 'rgba(30,111,217,.1)' }}>
-                <span className="icon-user" style={{ fontSize: 32, color: '#1e6fd9' }}></span>
+                <User size={32} strokeWidth={1.75} color="#1e6fd9" />
               </div>
               <h3>Artur Freitas</h3>
               <p className="mb-1">Engenheiro Geógrafo</p>

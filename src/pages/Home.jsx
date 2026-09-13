@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Landmark, Briefcase, Map, CalendarDays } from 'lucide-react'
 import Seo from '../components/Seo.jsx'
 import ValueCard from '../components/ValueCard.jsx'
 import ServiceCard from '../components/ServiceCard.jsx'
@@ -36,10 +37,6 @@ function Home() {
 
   const yearsActive = new Date().getFullYear() - 2013
 
-  const goToSlide = (offset) => {
-    setCurrent((index) => (index + offset + slides.length) % slides.length)
-  }
-
   return (
     <>
       <Seo
@@ -49,9 +46,13 @@ function Home() {
         path="/"
       />
       <section className="home-slider">
-        <div className="slider-track" style={{ transform: `translateX(-${current * 100}%)` }}>
-          {slides.map((slide) => (
-            <div className="slider-item" key={slide.image} style={{ backgroundImage: `url(${slide.image})` }}>
+        <div className="slider-track">
+          {slides.map((slide, index) => (
+            <div
+              className={`slider-item${index === current ? ' is-active' : ''}`}
+              key={slide.image}
+              style={{ backgroundImage: `url(${slide.image})` }}
+            >
               <div className="overlay"></div>
               <div className="container">
                 <div className="row no-gutters slider-text align-items-center justify-content-start">
@@ -68,13 +69,17 @@ function Home() {
             </div>
           ))}
         </div>
-        <div className="slider-arrows">
-          <button type="button" aria-label="Slide anterior" onClick={() => goToSlide(-1)}>
-            <span className="icon-chevron-left"></span>
-          </button>
-          <button type="button" aria-label="Slide seguinte" onClick={() => goToSlide(1)}>
-            <span className="icon-chevron-right"></span>
-          </button>
+        <div className="slider-dots">
+          {slides.map((slide, index) => (
+            <button
+              key={slide.image}
+              type="button"
+              className={`slider-dot${index === current ? ' is-active' : ''}`}
+              aria-label={`Ir para o slide ${index + 1}`}
+              aria-current={index === current}
+              onClick={() => setCurrent(index)}
+            ></button>
+          ))}
         </div>
       </section>
 
@@ -120,7 +125,8 @@ function Home() {
         <div className="container">
           <div className="row justify-content-center mb-5">
             <div className="col-md-10 text-center heading-section heading-section-white">
-              <h2 className="mb-0">Rigor Técnico no Terreno, em Todo o Território</h2>
+              <h2 className="mb-3">Rigor Técnico no Terreno, em Todo o Território</h2>
+              <p className="mb-0"><Link to="/projectos" className="btn btn-white px-4 py-2">Ver Projectos de Referência</Link></p>
             </div>
           </div>
         </div>
@@ -131,10 +137,10 @@ function Home() {
           <div className="row d-md-flex align-items-center justify-content-center">
             <div className="wrapper">
               <div className="row d-md-flex align-items-center">
-                <Counter icon="icon-institution" target={7} label="Instituições Públicas Servidas" />
-                <Counter icon="icon-briefcase" target={6} label="Instituições Privadas Servidas" />
-                <Counter icon="icon-map" target={7} label="Projectos de Referência" />
-                <Counter icon="icon-calendar" target={yearsActive} label="Anos de Actuação" />
+                <Counter icon={Landmark} target={7} label="Instituições Públicas Servidas" />
+                <Counter icon={Briefcase} target={6} label="Instituições Privadas Servidas" />
+                <Counter icon={Map} target={7} label="Projectos de Referência" />
+                <Counter icon={CalendarDays} target={yearsActive} label="Anos de Actuação" />
               </div>
             </div>
           </div>

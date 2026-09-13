@@ -2,10 +2,12 @@
 // imagens de stock genéricas do template (mockups de design gráfico) que não têm relação
 // nenhuma com trabalho de SIG/cadastro/topografia. Substituir por foto real quando disponível
 // (ver Fase 9 do plano — assets-novos/).
-function PlaceholderMedia({ icon = 'icon-map', className = '' }) {
+import { Map } from 'lucide-react'
+
+function PlaceholderMedia({ icon: Icon = Map, className = '' }) {
   return (
     <div className={`placeholder-media d-flex align-items-center justify-content-center ${className}`.trim()}>
-      <span className={icon}></span>
+      <Icon size={48} strokeWidth={1.5} />
     </div>
   )
 }

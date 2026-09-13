@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
+import { ArrowRight } from 'lucide-react'
 import Logo from './Logo.jsx'
 
 const links = [
   { to: '/', label: 'Início', end: true },
   { to: '/sobre', label: 'Sobre Nós' },
   { to: '/o-que-fazemos', label: 'O Que Fazemos' },
+  { to: '/formacoes', label: 'Formações' },
+  { to: '/galeria', label: 'Galeria' },
   { to: '/projectos', label: 'Projectos' },
   { to: '/blog', label: 'Blog' },
   { to: '/contactos', label: 'Contactos' },
@@ -58,7 +61,7 @@ function Navbar() {
 
       <Link to="/contactos" className="navbar-cta">
         <span>Fale Connosco</span>
-        <span className="icon-arrow-right ml-2"></span>
+        <span className="ml-2 d-inline-flex"><ArrowRight size={16} /></span>
       </Link>
     </nav>
   )

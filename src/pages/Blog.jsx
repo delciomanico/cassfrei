@@ -1,7 +1,9 @@
 import PageHeader from '../components/PageHeader.jsx'
 import Seo from '../components/Seo.jsx'
 import BlogCard from '../components/BlogCard.jsx'
+import SocialEmbed from '../components/SocialEmbed.jsx'
 import posts from '../data/posts.js'
+import socialPosts from '../data/socialPosts.js'
 import { breadcrumbJsonLd } from '../lib/seo.js'
 
 function Blog() {
@@ -34,6 +36,26 @@ function Blog() {
           )}
         </div>
       </section>
+
+      {socialPosts.length > 0 && (
+        <section className="ftco-section">
+          <div className="container">
+            <div className="row justify-content-center mb-5 pb-2">
+              <div className="col-md-8 text-center heading-section">
+                <h2 className="mb-4">Também no Instagram e Facebook</h2>
+                <p>As últimas publicações das nossas redes sociais.</p>
+              </div>
+            </div>
+            <div className="row justify-content-center">
+              {socialPosts.map((post) => (
+                <div className="col-md-6 col-lg-4 mb-4" key={post.url}>
+                  <SocialEmbed post={post} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </>
   )
 }

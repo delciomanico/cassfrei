@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-function Counter({ icon, target, label }) {
+function Counter({ icon: Icon, target, label }) {
   const [value, setValue] = useState(0)
   const ref = useRef(null)
   const started = useRef(false)
@@ -36,7 +36,7 @@ function Counter({ icon, target, label }) {
   return (
     <div className="col-md d-flex justify-content-center counter-wrap ftco-animate" data-aos="fade-up" ref={ref}>
       <div className="block-18">
-        <div className="icon"><span className={icon}></span></div>
+        <div className="icon"><Icon size={40} strokeWidth={1.5} /></div>
         <div className="text">
           <strong className="number">{value}</strong>
           <span>{label}</span>
