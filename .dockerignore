@@ -1,0 +1,11 @@
+node_modules
+dist
+.git
+.gitignore
+assets-novos
+legacy-static
+pnpm-lock.yaml
+pnpm-workspace.yaml
+npm-debug.log
+.vscode
+.idea

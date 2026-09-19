@@ -181,7 +181,12 @@
 }
 
 .home-slider .slider-item .slider-text {
-	h1 {
+	// O slide inactivo usa um <p> em vez de <h1> para o título (só um <h1> deve existir na
+	// página de cada vez, para não confundir motores de busca sobre qual é o título
+	// principal — ver Home.jsx) — mas visualmente tem de ficar igual, porque os dois slides
+	// ficam parcialmente visíveis ao mesmo tempo a meio do cross-fade.
+	h1,
+	.slider-heading-inactive {
 		color: $white;
 		font-weight: 300;
 		font-size: 56px;

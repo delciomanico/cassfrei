@@ -42,7 +42,7 @@ function Home() {
       <Seo
         raw
         title="Cassfrei-SIGT, Lda — Engenharia, Geologia, Cadastro Predial e SIG | Luanda, Angola"
-        description="Cassfrei-SIGT, Lda é uma empresa angolana de consultoria em Engenharia, Geologia e Arquitectura, especialista em Cadastro Predial, Cartografia, Planeamento Urbano e Sistemas de Informação Geográfica (SIG) em Luanda, Angola."
+        description="Consultoria em Engenharia, Geologia e Arquitectura: Cadastro Predial, Cartografia, Planeamento Urbano e SIG em Luanda, Angola."
         path="/"
       />
       <section className="home-slider">
@@ -52,13 +52,18 @@ function Home() {
               className={`slider-item${index === current ? ' is-active' : ''}`}
               key={slide.image}
               style={{ backgroundImage: `url(${slide.image})` }}
+              aria-hidden={index !== current}
             >
               <div className="overlay"></div>
               <div className="container">
                 <div className="row no-gutters slider-text align-items-center justify-content-start">
                   <div className="col-md-8">
                     <span className="subheading">{slide.subheading}</span>
-                    <h1 className="mb-4">{slide.heading}</h1>
+                    {index === current ? (
+                      <h1 className="mb-4">{slide.heading}</h1>
+                    ) : (
+                      <p className="mb-4 slider-heading-inactive">{slide.heading}</p>
+                    )}
                     <p>
                       <Link to="/o-que-fazemos" className="btn btn-primary px-4 py-3 mt-3">O Que Fazemos</Link>
                       <Link to="/contactos" className="btn btn-white px-4 py-3 mt-3 ml-3">Fale Connosco</Link>
