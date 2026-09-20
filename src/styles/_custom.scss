@@ -736,6 +736,11 @@ textarea:focus-visible,
 		&--c {
 			background: rgba($tertiary, .18);
 		}
+
+		&--image {
+			background-size: cover;
+			background-position: center top;
+		}
 	}
 
 	&__icons {
