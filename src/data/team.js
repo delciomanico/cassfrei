@@ -15,7 +15,7 @@ const team = [
   },
   {
     name: 'Delcio Monarca Dulo Manico',
-    role: 'Diretor de TI e Desenvolvedor de Software',
+    role: 'Desenvolvedor de Softwares',
     email: null,
   },
 ]
