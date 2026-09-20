@@ -1,11 +1,15 @@
-import { Landmark, Briefcase, Map, CalendarDays, User } from 'lucide-react'
+import { Landmark, Briefcase, Map, CalendarDays } from 'lucide-react'
 import PageHeader from '../components/PageHeader.jsx'
 import Seo from '../components/Seo.jsx'
 import ValueCard from '../components/ValueCard.jsx'
 import Counter from '../components/Counter.jsx'
+import TeamCard from '../components/TeamCard.jsx'
 import values from '../data/values.js'
+import team from '../data/team.js'
 import { publicClients, privateClients } from '../data/clients.js'
 import { breadcrumbJsonLd } from '../lib/seo.js'
+
+const teamColors = ['a', 'b', 'c']
 
 function Sobre() {
   const yearsActive = new Date().getFullYear() - 2013
@@ -122,26 +126,15 @@ function Sobre() {
         <div className="container">
           <div className="row justify-content-center mb-5 pb-2">
             <div className="col-md-8 text-center heading-section">
-              <h2 className="mb-4">Responsáveis Técnicos</h2>
+              <h2 className="mb-4">Equipa</h2>
             </div>
           </div>
-          <div className="row justify-content-center">
-            <div className="col-md-5 text-center mb-4">
-              <div className="icon mx-auto mb-3 d-flex align-items-center justify-content-center" style={{ width: 80, height: 80, borderRadius: '50%', background: 'rgba(30,111,217,.1)' }}>
-                <User size={32} strokeWidth={1.75} color="#1e6fd9" />
+          <div className="row">
+            {team.map((member, index) => (
+              <div className="col-md-4 mb-4" key={member.name}>
+                <TeamCard member={member} colorClass={teamColors[index % teamColors.length]} />
               </div>
-              <h3>Nadine Guimarães</h3>
-              <p className="mb-1">Geóloga</p>
-              <p><a href="mailto:nadine.guimarães@hotmail.com">nadine.guimarães@hotmail.com</a></p>
-            </div>
-            <div className="col-md-5 text-center mb-4">
-              <div className="icon mx-auto mb-3 d-flex align-items-center justify-content-center" style={{ width: 80, height: 80, borderRadius: '50%', background: 'rgba(30,111,217,.1)' }}>
-                <User size={32} strokeWidth={1.75} color="#1e6fd9" />
-              </div>
-              <h3>Artur Freitas</h3>
-              <p className="mb-1">Engenheiro Geógrafo</p>
-              <p><a href="mailto:arthuca3@gmail.com">arthuca3@gmail.com</a></p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
