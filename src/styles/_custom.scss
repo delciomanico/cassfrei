@@ -467,7 +467,7 @@
 // Hero: no mobile continua a ocupar o ecrã todo (como o template original — "100vh menos a
 // altura do menu", que fica em fluxo normal por cima, não sobreposto); a partir de "md" passa a
 // banner de altura fixa e mais discreta, já não precisa de engolir o primeiro ecrã inteiro em
-// ecrãs maiores. 52px corresponde à altura real medida do menu (".ftco-navbar-light") em mobile.
+// ecrãs maiores. 58px corresponde à altura real medida do menu (".ftco-navbar-light") em mobile.
 //
 // Transição entre slides: cross-fade — todos os slides ficam sobrepostos exactamente no
 // mesmo lugar ("slider-item" com position:absolute) e só a opacidade muda; o slide activo
@@ -475,7 +475,7 @@
 // por baixo. Mais suave que o slide horizontal anterior, sem depender de jQuery/Owl Carousel.
 .home-slider {
 	position: relative;
-	min-height: calc(100vh - 52px);
+	min-height: calc(100vh - 58px);
 	overflow: hidden;
 
 	@include media-breakpoint-up(md) {
@@ -488,7 +488,7 @@
 
 	.slider-track {
 		position: relative;
-		height: calc(100vh - 52px);
+		height: calc(100vh - 58px);
 
 		@include media-breakpoint-up(md) {
 			height: 280px;
@@ -568,33 +568,35 @@
 		}
 
 		@include media-breakpoint-down(md) {
-			padding-right: 48px;
+			padding-right: 54px;
 		}
 	}
 
 	// Barra mais fina em mobile/tablet (o template original tinha 10px de padding) e logótipo
-	// um pouco mais pequeno em proporção — a barra toda fica com ~52px de altura (8px + 36px +
-	// 8px), por isso o hero em ecrã inteiro (".home-slider", que subtrai a altura do menu) usa
-	// "52px".
+	// um pouco mais pequeno em proporção — a barra toda fica com ~58px de altura (9px + 40px +
+	// 9px), por isso o hero em ecrã inteiro (".home-slider", que subtrai a altura do menu) usa
+	// "58px".
 	@include media-breakpoint-down(md) {
-		padding: 8px 15px;
+		padding: 9px 15px;
 
 		.brand-logo__img {
-			height: 36px;
+			height: 40px;
 		}
 	}
 
 	// Botão de menu em mobile/tablet: mantém o estilo original (quadrado azul sólido, ícone
-	// branco, cantos vivos), mas agora ocupa a altura toda da barra ("top:0; bottom:0" em vez
-	// de uma altura fixa) — o quadrado e a barra ficam sempre ao mesmo nível, por muito que a
-	// altura da barra mude.
+	// branco, cantos vivos), a ocupar a altura toda da barra fechada (58px — ver o comentário
+	// sobre a barra mais fina acima). Tem de ser uma altura fixa, e não "bottom:0": o
+	// ".container" que o envolve também contém a lista de links (".navbar-collapse"), por isso
+	// cresce quando o menu abre — com "bottom:0" o quadrado esticava até ao fundo da lista
+	// aberta, em vez de ficar do tamanho da barra fechada.
 	.navbar-toggler {
 		@include media-breakpoint-down(md) {
 			position: absolute;
 			top: 0;
-			bottom: 0;
 			right: 0;
-			width: 48px;
+			width: 50px;
+			height: 58px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -604,7 +606,7 @@
 
 			span {
 				color: $white !important;
-				font-size: 18px;
+				font-size: 19px;
 			}
 		}
 	}
