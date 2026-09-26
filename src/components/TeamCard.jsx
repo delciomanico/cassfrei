@@ -28,7 +28,7 @@ function TeamCard({ member, colorClass }) {
         </div>
       </div>
       <h3 className="team-card__name">{name}</h3>
-      <p className="team-card__role">{role}</p>
+      {role && <p className="team-card__role">{role}</p>}
     </div>
   )
 }

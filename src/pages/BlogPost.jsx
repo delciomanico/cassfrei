@@ -1,7 +1,11 @@
+import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { Calendar, Clock } from 'lucide-react'
 import PageHeader from '../components/PageHeader.jsx'
 import Seo from '../components/Seo.jsx'
+import GalleryLightbox from '../components/GalleryLightbox.jsx'
 import posts from '../data/posts.js'
+import { readingTime } from '../lib/posts.js'
 import { breadcrumbJsonLd, absoluteUrl, SITE_NAME } from '../lib/seo.js'
 
 const monthsPt = [
@@ -17,6 +21,7 @@ function formatDate(iso) {
 function BlogPost() {
   const { slug } = useParams()
   const post = posts.find((item) => item.slug === slug)
+  const [activeIndex, setActiveIndex] = useState(null)
 
   if (!post) {
     return (
@@ -32,6 +37,11 @@ function BlogPost() {
       </>
     )
   }
+
+  const gallery = post.gallery || []
+  const closeLightbox = () => setActiveIndex(null)
+  const showPrev = () => setActiveIndex((index) => (index - 1 + gallery.length) % gallery.length)
+  const showNext = () => setActiveIndex((index) => (index + 1) % gallery.length)
 
   const articleJsonLd = {
     '@context': 'https://schema.org',
@@ -67,15 +77,43 @@ function BlogPost() {
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-8">
-              <p className="text-muted mb-4">{formatDate(post.date)}</p>
+              <div className="post-cover" style={{ backgroundImage: `url('${post.image}')` }}></div>
 
-              <p>
-                <img src={post.image} alt={post.title} className="img-fluid" />
-              </p>
+              <div className="post-meta">
+                <span className="post-meta__item"><Calendar size={15} /> {formatDate(post.date)}</span>
+                <span className="post-meta__item"><Clock size={15} /> {readingTime(post.body)} min de leitura</span>
+              </div>
 
-              {post.body.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
+              {post.tags?.length > 0 && (
+                <div className="post-tags">
+                  {post.tags.map((tag) => (
+                    <span className="post-tags__pill" key={tag}>{tag}</span>
+                  ))}
+                </div>
+              )}
+
+              <div className="post-content">
+                {post.body.map((paragraph, index) => (
+                  paragraph.startsWith('## ')
+                    ? <h3 key={index}>{paragraph.slice(3)}</h3>
+                    : <p key={index}>{paragraph}</p>
+                ))}
+              </div>
+
+              {gallery.length > 0 && (
+                <div className="post-gallery">
+                  {gallery.map((item, index) => (
+                    <button
+                      type="button"
+                      key={item.src}
+                      className="post-gallery__item"
+                      style={{ backgroundImage: `url(${item.src})` }}
+                      aria-label={item.caption || 'Ver foto ampliada'}
+                      onClick={() => setActiveIndex(index)}
+                    />
+                  ))}
+                </div>
+              )}
 
               <p className="mt-5">
                 <Link to="/blog" className="btn btn-outline-primary px-4 py-2">Voltar ao Blog</Link>
@@ -84,6 +122,16 @@ function BlogPost() {
           </div>
         </div>
       </section>
+
+      {activeIndex !== null && (
+        <GalleryLightbox
+          items={gallery}
+          index={activeIndex}
+          onClose={closeLightbox}
+          onPrev={showPrev}
+          onNext={showNext}
+        />
+      )}
     </>
   )
 }

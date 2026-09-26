@@ -5,19 +5,25 @@
 const team = [
   {
     name: 'Nadine Guimarães',
-    role: 'Geóloga',
+    role: 'Directora Geral',
     email: 'nadine.guimarães@hotmail.com',
   },
   {
     name: 'Artur Freitas',
-    role: 'Engenheiro Geógrafo',
+    role: 'Engenheiro Geógrafo e Co-fundador',
     email: 'arthuca3@gmail.com',
   },
   {
     name: 'Delcio Monarca Dulo Manico',
-    role: 'Desenvolvedor de Softwares',
+    role: 'Chefe do Departamento de TIC',
     email: null,
     image: '/images/delcio_foto.jpeg',
+  },
+  {
+    name: 'Co-fundador',
+    role: null,
+    email: null,
+    image: '/images/label3.jpeg',
   },
 ]
 

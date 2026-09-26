@@ -36,10 +36,6 @@ const galeria = [
     src: '/images/label2.jpeg',
     caption: 'Representação da CASSFREI no Fórum do World Bank sobre Concessões de Terra (Co-fundador)',
   },
-  {
-    src: '/images/label3.jpeg',
-    caption: 'Co-fundador da CASSFREI no Programa de Modernização Cadastral de Luanda – realizado pelo IGCA',
-  },
 ]
 
 export default galeria

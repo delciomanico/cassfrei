@@ -64,10 +64,10 @@ function Home() {
                     ) : (
                       <p className="mb-4 slider-heading-inactive">{slide.heading}</p>
                     )}
-                    <p>
-                      <Link to="/o-que-fazemos" className="btn btn-primary px-4 py-3 mt-3">O Que Fazemos</Link>
-                      <Link to="/contactos" className="btn btn-white px-4 py-3 mt-3 ml-3">Fale Connosco</Link>
-                    </p>
+                    <div className="slider-cta">
+                      <Link to="/o-que-fazemos" className="btn btn-primary px-4 py-3">O Que Fazemos</Link>
+                      <Link to="/contactos" className="btn btn-white px-4 py-3">Fale Connosco</Link>
+                    </div>
                   </div>
                 </div>
               </div>

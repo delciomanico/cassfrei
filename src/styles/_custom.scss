@@ -189,11 +189,13 @@
 	.slider-heading-inactive {
 		color: $white;
 		font-weight: 300;
-		font-size: 56px;
+		font-size: 40px;
 		line-height: 1.2;
+		margin-bottom: 20px;
 
 		@include media-breakpoint-down(md) {
-			font-size: 36px;
+			font-size: 24px;
+			margin-bottom: 10px;
 		}
 	}
 
@@ -203,6 +205,32 @@
 
 	p {
 		color: rgba(255, 255, 255, .9);
+	}
+}
+
+// Botões do hero (Home.jsx) — antes eram classes utilitárias do Bootstrap ("mt-3 ml-3"), mas
+// com o banner mais baixo os dois botões lado a lado quebravam para uma segunda linha em ecrãs
+// estreitos e ultrapassavam a altura fixa da faixa (".home-slider" tem "overflow:hidden"),
+// cortando o segundo botão a meio. Em ecrãs pequenos empilham a toda a largura, com menos
+// preenchimento, para caberem sempre dentro da faixa.
+.slider-cta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 12px;
+	margin-top: 14px;
+
+	@include media-breakpoint-down(sm) {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 8px;
+		margin-top: 10px;
+
+		.btn {
+			width: 100%;
+			text-align: center;
+			padding: 8px 20px;
+		}
 	}
 }
 
@@ -436,34 +464,38 @@
 	color: $primary;
 }
 
-// Hero a ocupar toda a viewport — o template original definia a altura (600px) só dentro
-// do selector composto ".owl-carousel.home-slider", que deixou de existir quando o plugin
-// jQuery Owl Carousel foi removido. Repor aqui, já como altura de viewport completa.
+// Hero: no mobile continua a ocupar o ecrã todo (como o template original — "100vh menos a
+// altura do menu", que fica em fluxo normal por cima, não sobreposto); a partir de "md" passa a
+// banner de altura fixa e mais discreta, já não precisa de engolir o primeiro ecrã inteiro em
+// ecrãs maiores. 52px corresponde à altura real medida do menu (".ftco-navbar-light") em mobile.
 //
 // Transição entre slides: cross-fade — todos os slides ficam sobrepostos exactamente no
 // mesmo lugar ("slider-item" com position:absolute) e só a opacidade muda; o slide activo
 // ("is-active") sobe para opacity:1 e para cima na pilha (z-index), os restantes ficam a 0
 // por baixo. Mais suave que o slide horizontal anterior, sem depender de jQuery/Owl Carousel.
-// A altura é "100vh menos a altura do menu" (e não 100vh cheios) porque o menu está em
-// fluxo normal por cima do hero (não sobreposto) — hero + menu preenchem exactamente um
-// ecrã, sem sobrar espaço a mais (que obrigaria a um scroll mínimo) nem a menos.
-// 62px/64px correspondem à altura real medida do menu (".ftco-navbar-light") em cada
-// breakpoint — ajustar aqui também se o conteúdo do menu mudar de altura.
 .home-slider {
 	position: relative;
-	min-height: calc(100vh - 62px);
+	min-height: calc(100vh - 52px);
 	overflow: hidden;
 
+	@include media-breakpoint-up(md) {
+		min-height: 280px;
+	}
+
 	@include media-breakpoint-up(lg) {
-		min-height: calc(100vh - 64px);
+		min-height: 340px;
 	}
 
 	.slider-track {
 		position: relative;
-		height: calc(100vh - 62px);
+		height: calc(100vh - 52px);
+
+		@include media-breakpoint-up(md) {
+			height: 280px;
+		}
 
 		@include media-breakpoint-up(lg) {
-			height: calc(100vh - 64px);
+			height: 340px;
 		}
 	}
 
@@ -536,22 +568,33 @@
 		}
 
 		@include media-breakpoint-down(md) {
-			padding-right: 64px;
+			padding-right: 48px;
 		}
 	}
 
-	// Botão de menu em mobile/tablet: quadrado azul a toda a altura da barra do menu (mesmo
-	// tratamento do CTA "Fale Connosco" em desktop), em vez do ícone solto sobre fundo
-	// branco — mais fácil de bater com o dedo e consistente com a aba do CTA. Altura fixa
-	// (não "bottom:0") para se manter sempre um quadrado, mesmo quando o menu abre e a nav
-	// cresce para acomodar a lista de links por baixo.
+	// Barra mais fina em mobile/tablet (o template original tinha 10px de padding) e logótipo
+	// um pouco mais pequeno em proporção — a barra toda fica com ~52px de altura (8px + 36px +
+	// 8px), por isso o hero em ecrã inteiro (".home-slider", que subtrai a altura do menu) usa
+	// "52px".
+	@include media-breakpoint-down(md) {
+		padding: 8px 15px;
+
+		.brand-logo__img {
+			height: 36px;
+		}
+	}
+
+	// Botão de menu em mobile/tablet: mantém o estilo original (quadrado azul sólido, ícone
+	// branco, cantos vivos), mas agora ocupa a altura toda da barra ("top:0; bottom:0" em vez
+	// de uma altura fixa) — o quadrado e a barra ficam sempre ao mesmo nível, por muito que a
+	// altura da barra mude.
 	.navbar-toggler {
 		@include media-breakpoint-down(md) {
 			position: absolute;
 			top: 0;
+			bottom: 0;
 			right: 0;
-			width: 64px;
-			height: 64px;
+			width: 48px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -561,7 +604,7 @@
 
 			span {
 				color: $white !important;
-				font-size: 22px;
+				font-size: 18px;
 			}
 		}
 	}
@@ -780,5 +823,274 @@ textarea:focus-visible,
 		letter-spacing: .05em;
 		color: $tertiary;
 		margin-bottom: 0;
+	}
+}
+
+// Faixa de título antes do conteúdo de cada página (ver PageHeader.jsx) — o template original
+// tinha uma banda com foto de fundo, sobreposição a toda a largura e 300px de altura, com
+// título grande e negrito (peso 900); substituída por uma barra discreta de uma só linha
+// (título à esquerda, migalha de pão à direita), sem foto — o destaque visual de cada página
+// já vem do seu próprio conteúdo, não precisa de repetir-se aqui.
+.page-header {
+	background: $darken;
+	padding: 14px 0;
+
+	&__row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 4px 20px;
+	}
+
+	&__title {
+		margin: 0;
+		font-size: 18px;
+		font-weight: 700;
+		color: $white;
+	}
+
+	&__breadcrumbs {
+		margin: 0;
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 12px;
+		text-transform: uppercase;
+		letter-spacing: .03em;
+		color: rgba($white, .6);
+
+		a {
+			color: rgba($white, .8);
+
+			&:hover {
+				color: $white;
+			}
+		}
+
+		svg {
+			flex-shrink: 0;
+		}
+
+		span {
+			color: rgba($white, .6);
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			max-width: 220px;
+		}
+	}
+
+	@include media-breakpoint-up(md) {
+		padding: 18px 0;
+
+		&__title {
+			font-size: 20px;
+		}
+	}
+}
+
+// Foto de capa do artigo (BlogPost.jsx) — desde que a faixa de título deixou de ter foto de
+// fundo (ver ".page-header" acima), a capa do post passa a viver aqui, como um bloco normal
+// dentro do conteúdo do artigo.
+.post-cover {
+	width: 100%;
+	height: 260px;
+	border-radius: 8px;
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	margin-bottom: 24px;
+
+	@include media-breakpoint-up(md) {
+		height: 340px;
+	}
+}
+
+// Blog: cartão da lista (BlogCard.jsx) e artigo (BlogPost.jsx) — o template original usava
+// uma barra grossa colorida à volta do cartão e um selo de data sobreposto na foto (".text",
+// ".meta-date" em main.scss); substituído por um cartão mais limpo com imagem no topo, badge
+// de categoria e meta (data/tempo de leitura) com ícones lucide, ao mesmo nível visual dos
+// outros cartões do site (".value-card", ".formacao-card").
+.blog-entry {
+	border: none;
+	background: $white;
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0px 5px 18px -9px rgba(0, 0, 0, .14);
+	@include transition(.3s);
+	margin-bottom: 30px;
+	height: calc(100% - 30px);
+	display: flex;
+	flex-direction: column;
+
+	&:hover {
+		transform: translateY(-4px);
+		box-shadow: 0px 12px 28px -10px rgba(0, 0, 0, .22);
+	}
+
+	&__media {
+		display: block;
+		height: 200px;
+		background-size: cover;
+		background-position: center center;
+		background-repeat: no-repeat;
+		position: relative;
+	}
+
+	&__media-link {
+		position: absolute;
+		inset: 0;
+	}
+
+	&__tag {
+		pointer-events: none;
+		position: absolute;
+		top: 14px;
+		left: 14px;
+		background: $primary;
+		color: $white;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: .04em;
+		padding: 4px 12px;
+		border-radius: 20px;
+	}
+
+	&__body {
+		padding: 24px;
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+	}
+
+	&__meta {
+		display: flex;
+		gap: 16px;
+		font-size: 13px;
+		color: $tertiary;
+		margin-bottom: 12px;
+
+		span {
+			display: inline-flex;
+			align-items: center;
+			gap: 5px;
+		}
+	}
+
+	&__title {
+		font-size: 19px;
+		margin-bottom: 10px;
+
+		a {
+			color: $black;
+			@include transition(.2s);
+
+			&:hover {
+				color: $primary;
+			}
+		}
+	}
+
+	&__excerpt {
+		color: $tertiary;
+		font-size: 15px;
+		flex: 1;
+	}
+
+	&__cta {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		margin-top: 16px;
+		font-weight: 700;
+		color: $primary;
+		@include transition(.2s);
+
+		svg {
+			@include transition(.2s);
+		}
+
+		&:hover {
+			color: darken($primary, 10%);
+			text-decoration: none;
+
+			svg {
+				transform: translateX(3px);
+			}
+		}
+	}
+}
+
+// Meta (data/tempo de leitura) e tags do artigo (BlogPost.jsx) — "bg" do PageHeader já mostra
+// a foto de capa, por isso o artigo em si começa directamente por esta linha de meta.
+.post-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	color: $tertiary;
+	font-size: 14px;
+	margin-bottom: 16px;
+
+	&__item {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+	}
+}
+
+.post-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 30px;
+
+	&__pill {
+		background: rgba($primary, .1);
+		color: $primary;
+		font-size: 12px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: .03em;
+		padding: 5px 14px;
+		border-radius: 20px;
+	}
+}
+
+.post-content {
+	font-size: 16px;
+	line-height: 1.8;
+
+	h3 {
+		margin-top: 40px;
+		margin-bottom: 16px;
+		font-size: 22px;
+		color: $darken;
+	}
+}
+
+// Mini-galeria embutida num artigo (ver BlogPost.jsx e "gallery" em posts.js) — reaproveita o
+// GalleryLightbox já usado em "/galeria" para ampliar cada foto ao clicar.
+.post-gallery {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+	gap: 10px;
+	margin: 30px 0;
+
+	&__item {
+		border: none;
+		padding: 0;
+		aspect-ratio: 4 / 3;
+		background-size: cover;
+		background-position: center center;
+		background-repeat: no-repeat;
+		border-radius: 6px;
+		cursor: pointer;
+		@include transition(.2s);
+
+		&:hover {
+			transform: scale(1.03);
+		}
 	}
 }
