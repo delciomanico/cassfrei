@@ -20,6 +20,26 @@ const galeria = [
     src: '/images/foto-reuniao-corredor.jpg',
     caption: 'Reunião com parceiros',
   },
+  {
+    src: '/images/label5.jpeg',
+    caption: 'Representação da CASSFREI na Esri User Conference – San Diego (Co-fundador)',
+  },
+  {
+    src: '/images/label4.jpeg',
+    caption: 'Representação da CASSFREI na Esri User Conference – San Diego (Co-fundador)',
+  },
+  {
+    src: '/images/label1.jpeg',
+    caption: 'Representação da CASSFREI na Esri User Conference – San Diego (Co-fundador)',
+  },
+  {
+    src: '/images/label2.jpeg',
+    caption: 'Representação da CASSFREI no Fórum do World Bank sobre Concessões de Terra (Co-fundador)',
+  },
+  {
+    src: '/images/label3.jpeg',
+    caption: 'Co-fundador da CASSFREI no Programa de Modernização Cadastral de Luanda – realizado pelo IGCA',
+  },
 ]
 
 export default galeria
