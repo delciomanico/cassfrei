@@ -7,11 +7,13 @@ const team = [
     name: 'Nadine Guimarães',
     role: 'Directora Geral',
     email: 'nadine.guimarães@hotmail.com',
+    image: '/images/nadine_foto.jpeg',
   },
   {
     name: 'Artur Freitas',
     role: 'Engenheiro Geógrafo e Co-fundador',
     email: 'arthuca3@gmail.com',
+    image: '/images/artur_foto.jpeg',
   },
   {
     name: 'Delcio Monarca Dulo Manico',
@@ -20,8 +22,8 @@ const team = [
     image: '/images/delcio_foto.jpeg',
   },
   {
-    name: 'Co-fundador',
-    role: null,
+    name: 'Daniel Cassomac',
+    role: 'Co-fundador',
     email: null,
     image: '/images/label3.jpeg',
   },

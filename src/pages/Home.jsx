@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Landmark, Briefcase, Map, CalendarDays } from 'lucide-react'
+import { Landmark, Briefcase, Map, CalendarDays, Compass } from 'lucide-react'
 import Seo from '../components/Seo.jsx'
 import ValueCard from '../components/ValueCard.jsx'
 import ServiceCard from '../components/ServiceCard.jsx'
@@ -10,31 +9,9 @@ import values from '../data/values.js'
 import { consultoriaServices, estudosServices } from '../data/services.js'
 import projects from '../data/projects.js'
 
-const slides = [
-  {
-    image: '/images/foto-drone-equipa.jpg',
-    subheading: 'Bem-vindo à Cassfrei-SIGT',
-    heading: 'Sistemas de Informação e Gestão Territorial',
-  },
-  {
-    image: '/images/foto-seminario-toponimia.jpg',
-    subheading: 'Consultoria em Engenharia, Geologia e Arquitectura',
-    heading: 'Tranquilidade e Agilidade em Cada Projecto',
-  },
-]
-
 const homeServices = [...consultoriaServices.slice(0, 2), ...estudosServices.slice(0, 4)]
 
 function Home() {
-  const [current, setCurrent] = useState(0)
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((index) => (index + 1) % slides.length)
-    }, 6000)
-    return () => clearInterval(timer)
-  }, [])
-
   const yearsActive = new Date().getFullYear() - 2013
 
   return (
@@ -45,46 +22,29 @@ function Home() {
         description="Consultoria em Engenharia, Geologia e Arquitectura: Cadastro Predial, Cartografia, Planeamento Urbano e SIG em Luanda, Angola."
         path="/"
       />
-      <section className="home-slider">
-        <div className="slider-track">
-          {slides.map((slide, index) => (
-            <div
-              className={`slider-item${index === current ? ' is-active' : ''}`}
-              key={slide.image}
-              style={{ backgroundImage: `url(${slide.image})` }}
-              aria-hidden={index !== current}
-            >
-              <div className="overlay"></div>
-              <div className="container">
-                <div className="row no-gutters slider-text align-items-center justify-content-start">
-                  <div className="col-md-8">
-                    <span className="subheading">{slide.subheading}</span>
-                    {index === current ? (
-                      <h1 className="mb-4">{slide.heading}</h1>
-                    ) : (
-                      <p className="mb-4 slider-heading-inactive">{slide.heading}</p>
-                    )}
-                    <div className="slider-cta">
-                      <Link to="/o-que-fazemos" className="btn btn-primary px-4 py-3">O Que Fazemos</Link>
-                      <Link to="/contactos" className="btn btn-white px-4 py-3">Fale Connosco</Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      <section className="hero-glass" style={{ backgroundImage: 'url(/images/foto-drone-equipa.jpg)' }}>
+        <div className="hero-glass__pane" aria-hidden="true"></div>
+        <div className="hero-glass__shade" aria-hidden="true"></div>
+        <div className="container hero-glass__container">
+          <div className="hero-glass__side hero-glass__side--left">
+            <span className="hero-glass__kicker">Bem-vindo à Cassfrei-SIGT</span>
+            <h1 className="hero-glass__title">O Território</h1>
+            <p className="hero-glass__text">
+              Organizações ambiciosas em Angola confiam na Cassfrei-SIGT para apoiar decisões mais sustentáveis sobre cadastro, cartografia e gestão do território.
+            </p>
+            <div className="slider-cta">
+              <Link to="/o-que-fazemos" className="btn hero-glass__btn hero-glass__btn--solid px-4 py-3">O Que Fazemos</Link>
+              <Link to="/contactos" className="btn hero-glass__btn hero-glass__btn--outline px-4 py-3">Fale Connosco</Link>
             </div>
-          ))}
-        </div>
-        <div className="slider-dots">
-          {slides.map((slide, index) => (
-            <button
-              key={slide.image}
-              type="button"
-              className={`slider-dot${index === current ? ' is-active' : ''}`}
-              aria-label={`Ir para o slide ${index + 1}`}
-              aria-current={index === current}
-              onClick={() => setCurrent(index)}
-            ></button>
-          ))}
+          </div>
+
+          <div className="hero-glass__emblem" aria-hidden="true">
+            <Compass />
+          </div>
+
+          <div className="hero-glass__side hero-glass__side--right">
+            <h1 className="hero-glass__title">A Solução</h1>
+          </div>
         </div>
       </section>
 

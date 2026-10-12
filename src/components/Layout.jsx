@@ -19,7 +19,9 @@ function Layout() {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <main className={`page-content${pathname === '/' ? ' page-content--overlay' : ''}`}>
+        <Outlet />
+      </main>
       <Footer />
     </>
   )

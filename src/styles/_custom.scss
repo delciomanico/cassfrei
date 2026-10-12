@@ -549,18 +549,269 @@
 
 }
 
+// Hero "vidrado" (inspirado num hero de referência com corte diagonal em vidro fosco e
+// emblema central): uma única foto de fundo cortada ao meio por um painel diagonal em
+// "glassmorphism" (fundo semi-transparente + backdrop-filter: blur), com um título grande
+// de cada lado do corte e um emblema circular de vidro sobre a própria linha diagonal.
+// Substitui o antigo carrossel ".home-slider" (mantido mais abaixo, sem uso actualmente).
+// Compensa a nav agora fixa (ver ".ftco-navbar-light" mais abaixo): todas as páginas recebem
+// de volta no topo o espaço que a nav deixou de reservar no fluxo normal — excepto a Home
+// (".page-content--overlay"), cujo hero fica deliberadamente por baixo da nav transparente.
+// "--nav-height" é medido em JS (Navbar.jsx); o valor de recurso cobre o primeiro render,
+// antes de o efeito correr.
+.page-content {
+	padding-top: var(--nav-height, 58px);
+
+	&--overlay {
+		padding-top: 0;
+	}
+}
+
+.hero-glass {
+	position: relative;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+
+	@include media-breakpoint-up(md) {
+		min-height: 560px;
+	}
+
+	// Escurece a foto inteira, para o texto branco manter contraste também fora do painel
+	// de vidro (que já tem o seu próprio escurecimento, mais forte, a seguir).
+	&__shade {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		background: rgba($black, .35);
+	}
+
+	// O corte diagonal em vidro fosco: cobre metade da secção (o lado esquerdo, oposto ao
+	// bloco de texto e botões, que fica no lado direito — ver Home.jsx), com a borda direita
+	// cortada na diagonal — não é só uma faixa fina, é mesmo um painel largo, como no hero de
+	// referência. "backdrop-filter" desfoca a foto por trás (o efeito "vidrado" propriamente
+	// dito) e o gradiente azul por cima dá profundidade.
+	&__pane {
+		position: absolute;
+		inset: 0;
+		z-index: 2;
+		clip-path: polygon(0 0, 42% 0, 62% 100%, 0 100%);
+		background: linear-gradient(135deg, rgba($primary, .5), rgba(darken($primary, 25%), .82));
+		backdrop-filter: blur(14px) saturate(140%);
+		-webkit-backdrop-filter: blur(14px) saturate(140%);
+		border-right: 1px solid rgba($white, .3);
+
+		@include media-breakpoint-down(sm) {
+			display: none;
+		}
+	}
+
+	&__container {
+		position: relative;
+		z-index: 3;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 24px;
+
+		@include media-breakpoint-down(sm) {
+			flex-direction: column;
+			text-align: center;
+			gap: 36px;
+			padding-top: 40px;
+			padding-bottom: 40px;
+		}
+	}
+
+	&__side {
+		flex: 1;
+		min-width: 0;
+
+		// Só tem o título "A Solução" (ver Home.jsx) — empurrado até à ponta deste lado,
+		// para ficar próximo do emblema central, tal como o bloco de texto do lado oposto.
+		&--right {
+			display: flex;
+			justify-content: flex-start;
+
+			@include media-breakpoint-down(sm) {
+				justify-content: center;
+				text-align: center;
+			}
+		}
+	}
+
+	&__kicker {
+		display: inline-block;
+		color: $secondary;
+		font-weight: 600;
+		letter-spacing: .03em;
+		margin-bottom: 14px;
+	}
+
+	&__title {
+		color: $white;
+		font-weight: 300;
+		font-size: 48px;
+		line-height: 1.1;
+		margin-bottom: 18px;
+
+		@include media-breakpoint-down(md) {
+			font-size: 34px;
+		}
+
+		@include media-breakpoint-down(sm) {
+			font-size: 30px;
+			margin-bottom: 10px;
+		}
+	}
+
+	&__text {
+		color: rgba($white, .9);
+		max-width: 420px;
+		margin-bottom: 0;
+	}
+
+	// Emblema circular de vidro, centrado sobre a linha diagonal do painel — mesmo princípio
+	// visual do "&" em destaque no hero de referência, aqui com um ícone de bússola (mais
+	// adequado a uma empresa de cartografia/gestão territorial).
+	&__emblem {
+		position: relative;
+		z-index: 4;
+		flex: 0 0 auto;
+		width: 84px;
+		height: 84px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba($white, .14);
+		border: 1px solid rgba($white, .5);
+		backdrop-filter: blur(6px);
+		-webkit-backdrop-filter: blur(6px);
+		box-shadow: 0 10px 30px rgba($black, .25);
+
+		svg {
+			width: 38px;
+			height: 38px;
+			color: $white;
+			stroke-width: 1.5;
+		}
+
+		@include media-breakpoint-down(sm) {
+			width: 64px;
+			height: 64px;
+
+			svg {
+				width: 28px;
+				height: 28px;
+			}
+		}
+	}
+
+	&__btn {
+		backdrop-filter: blur(4px);
+		-webkit-backdrop-filter: blur(4px);
+
+		&--solid {
+			background: rgba($white, .95);
+			border-color: rgba($white, .95);
+			color: $primary;
+
+			&:hover {
+				background: $white;
+				border-color: $white;
+			}
+		}
+
+		&--outline {
+			background: rgba($white, .08);
+			border: 1px solid rgba($white, .7);
+			color: $white;
+
+			&:hover {
+				background: rgba($white, .18);
+			}
+		}
+	}
+}
+
 // Menu branco de faixa única (a antiga barra de contactos por cima do menu foi
 // removida). O CTA "Fale Connosco" fica encostado à margem direita da janela, a toda
 // a altura da nav — por isso a nav precisa de position:relative e o CTA de position:
 // absolute, em vez de participar do fluxo flex normal do ".container".
-// Menu fixo: acompanha o scroll em vez de desaparecer para trás do hero. "sticky" em vez
-// de "fixed" porque não precisa de compensação de padding no <body> — o menu simplesmente
-// deixa de rolar assim que atinge o topo da janela.
+//
+// Menu sempre fixo (plana sobre a página, não reserva espaço no fluxo normal) — para poder
+// sobrepor-se de forma transparente ao hero vidrado da Home logo no topo, como no hero de
+// referência, e só passar a fundo branco sólido ao primeiro scroll (ver ".is-transparent"
+// abaixo e o estado "scrolled" em Navbar.jsx). Como a nav deixa de reservar espaço, esse
+// espaço é compensado à parte em ".page-content" (ver Layout.jsx) em todas as páginas
+// excepto a Home, onde o hero fica deliberadamente por baixo da nav.
 .ftco-navbar-light {
-	position: sticky;
+	position: fixed;
 	top: 0;
+	left: 0;
+	right: 0;
 	z-index: 1000;
+	background: $white !important;
 	box-shadow: 0 2px 12px -6px rgba(0, 0, 0, .15);
+	transition: background .3s ease, box-shadow .3s ease;
+
+	// Estado inicial no topo da Home: transparente, sem sombra, texto e ícones a branco,
+	// deixando o hero por trás ler-se através da nav. Qualquer scroll, por pequeno que seja,
+	// tira esta classe (ver Navbar.jsx) e a nav volta ao estado branco normal acima.
+	&.is-transparent {
+		background: transparent !important;
+		box-shadow: none;
+
+		.navbar-brand,
+		.nav-link {
+			color: $white !important;
+		}
+
+		.nav-link:hover {
+			color: $secondary !important;
+		}
+
+		&.navbar-light .navbar-nav .nav-link.is-active {
+			color: $secondary !important;
+		}
+
+		.navbar-toggler span {
+			color: $white !important;
+		}
+
+		.navbar-cta {
+			background: rgba($white, .14);
+			backdrop-filter: blur(4px);
+			-webkit-backdrop-filter: blur(4px);
+
+			&:hover,
+			&:focus {
+				background: rgba($white, .24);
+			}
+		}
+
+		// O ficheiro do logótipo (src/assets/logo.png) tem fundo branco "queimado" na própria
+		// imagem, não transparente — sobre a nav transparente isso criava um rectângulo branco
+		// cru, destacado, sem relação com o resto do hero vidrado. Em vez disso, o logótipo
+		// ganha a mesma linguagem visual dos outros elementos de vidro da secção (emblema,
+		// botões): uma pílula translúcida com desfoque, para o branco do ficheiro se fundir
+		// no vidro em vez de se destacar como um autocolante por cima da foto.
+		.brand-logo {
+			background: rgba($white, .22);
+			border: 1px solid rgba($white, .4);
+			border-radius: 999px;
+			padding: 3px 12px 3px 6px;
+			margin-right: 10px;
+			backdrop-filter: blur(6px);
+			-webkit-backdrop-filter: blur(6px);
+			box-shadow: 0 8px 20px -8px rgba($black, .4);
+		}
+	}
 
 	.container {
 		@include media-breakpoint-up(lg) {

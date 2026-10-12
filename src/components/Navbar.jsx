@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { NavLink, Link, useLocation } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import Logo from './Logo.jsx'
 
@@ -16,9 +16,47 @@ const links = [
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const navRef = useRef(null)
+  const { pathname } = useLocation()
+  const isHome = pathname === '/'
+
+  // No topo da Home a nav fica transparente, sobreposta ao hero vidrado (ver ".hero-glass"
+  // em Home.jsx); assim que a página desloca ainda que pouco, volta ao fundo branco normal
+  // — igual em todas as páginas.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  // A nav é "fixed" em todas as páginas (ver CSS), por isso o resto do conteúdo precisa de
+  // compensar a altura dela no topo (".page-content" em Layout.jsx) — excepto na Home, onde
+  // o hero fica deliberadamente por baixo. Mede-se a altura real em vez de a fixar por CSS
+  // porque varia por breakpoint e muda sempre que o menu é alterado.
+  useEffect(() => {
+    const el = navRef.current
+    if (!el) return
+    const setNavHeightVar = () => {
+      if (isOpen) return
+      document.documentElement.style.setProperty('--nav-height', `${el.offsetHeight}px`)
+    }
+    setNavHeightVar()
+    window.addEventListener('resize', setNavHeightVar)
+    return () => window.removeEventListener('resize', setNavHeightVar)
+  }, [isOpen])
+
+  // Com o menu mobile aberto a nav passa sempre a sólida — a lista de links não tem fundo
+  // próprio e, transparente, ficava ilegível por cima da foto do hero por trás.
+  const isTransparent = isHome && !scrolled && !isOpen
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light ftco-navbar-light" id="ftco-navbar">
+    <nav
+      ref={navRef}
+      className={`navbar navbar-expand-lg navbar-light ftco-navbar-light${isTransparent ? ' is-transparent' : ''}`}
+      id="ftco-navbar"
+    >
       <div className="container d-flex align-items-center">
         <Logo variant="navbar" />
 
