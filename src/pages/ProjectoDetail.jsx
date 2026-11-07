@@ -3,11 +3,17 @@ import PageHeader from '../components/PageHeader.jsx'
 import PlaceholderMedia from '../components/PlaceholderMedia.jsx'
 import Seo from '../components/Seo.jsx'
 import projects from '../data/projects.js'
+import { useCollection } from '../hooks/useCollection.js'
+import { fromProject } from '../lib/cms-maps.js'
 import { breadcrumbJsonLd } from '../lib/seo.js'
 
 function ProjectoDetail() {
   const { slug } = useParams()
-  const project = projects.find((item) => item.slug === slug)
+  const { items: projectList, ready } = useCollection('projects', projects, { map: fromProject })
+  const project = projectList.find((item) => item.slug === slug)
+
+  // Enquanto o CMS não responde, um projecto que só exista lá não deve aparecer como inexistente.
+  if (!project && !ready) return null
 
   if (!project) {
     return (

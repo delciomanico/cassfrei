@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-function Counter({ icon: Icon, target, label }) {
+function Counter({ icon: Icon, target, label, variant = 'default' }) {
   const [value, setValue] = useState(0)
   const ref = useRef(null)
   const started = useRef(false)
@@ -32,6 +32,15 @@ function Counter({ icon: Icon, target, label }) {
     observer.observe(node)
     return () => observer.disconnect()
   }, [target])
+
+  if (variant === 'glass') {
+    return (
+      <div className="stat-tile" data-aos="fade-up" ref={ref}>
+        <strong className="stat-tile__number">{value}</strong>
+        <span className="stat-tile__label">{label}</span>
+      </div>
+    )
+  }
 
   return (
     <div className="col-md d-flex justify-content-center counter-wrap ftco-animate" data-aos="fade-up" ref={ref}>

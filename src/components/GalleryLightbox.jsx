@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
+import { isVideo, mediaThumb } from '../lib/media.js'
 
 function GalleryLightbox({ items, index, onClose, onPrev, onNext }) {
   const containerRef = useRef(null)
@@ -47,7 +48,7 @@ function GalleryLightbox({ items, index, onClose, onPrev, onNext }) {
       className="lightbox-overlay"
       role="dialog"
       aria-modal="true"
-      aria-label={item.caption || 'Foto ampliada'}
+      aria-label={item.caption || 'Foto ou vídeo ampliado'}
       ref={containerRef}
       onClick={onClose}
     >
@@ -68,7 +69,22 @@ function GalleryLightbox({ items, index, onClose, onPrev, onNext }) {
       </button>
 
       <figure className="lightbox-content" onClick={(event) => event.stopPropagation()}>
-        <img src={item.src} alt={item.caption} />
+        {isVideo(item) ? (
+          item.youtube ? (
+            <div className="lightbox-video">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${item.youtube}?autoplay=1&rel=0`}
+                title={item.caption}
+                allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          ) : (
+            <video src={item.file} poster={mediaThumb(item)} controls autoPlay playsInline />
+          )
+        ) : (
+          <img src={item.src} alt={item.caption} />
+        )}
         {item.caption && <figcaption>{item.caption}</figcaption>}
       </figure>
 

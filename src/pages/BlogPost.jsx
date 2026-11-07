@@ -5,6 +5,8 @@ import PageHeader from '../components/PageHeader.jsx'
 import Seo from '../components/Seo.jsx'
 import GalleryLightbox from '../components/GalleryLightbox.jsx'
 import posts from '../data/posts.js'
+import { useCollection } from '../hooks/useCollection.js'
+import { fromPost } from '../lib/cms-maps.js'
 import { readingTime } from '../lib/posts.js'
 import { breadcrumbJsonLd, absoluteUrl, SITE_NAME } from '../lib/seo.js'
 
@@ -20,8 +22,12 @@ function formatDate(iso) {
 
 function BlogPost() {
   const { slug } = useParams()
-  const post = posts.find((item) => item.slug === slug)
+  const { items: postList, ready } = useCollection('posts', posts, { map: fromPost })
+  const post = postList.find((item) => item.slug === slug)
   const [activeIndex, setActiveIndex] = useState(null)
+
+  // Enquanto o CMS não responde, um artigo que só exista lá não deve aparecer como inexistente.
+  if (!post && !ready) return null
 
   if (!post) {
     return (

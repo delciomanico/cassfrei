@@ -2,9 +2,13 @@ import PageHeader from '../components/PageHeader.jsx'
 import Seo from '../components/Seo.jsx'
 import ProjectCard from '../components/ProjectCard.jsx'
 import projects from '../data/projects.js'
+import { useCollection } from '../hooks/useCollection.js'
+import { fromProject } from '../lib/cms-maps.js'
 import { breadcrumbJsonLd } from '../lib/seo.js'
 
 function Projectos() {
+  const { items: projectList } = useCollection('projects', projects, { map: fromProject })
+
   return (
     <>
       <Seo
@@ -18,7 +22,7 @@ function Projectos() {
       <section className="ftco-section">
         <div className="container">
           <div className="row">
-            {projects.map((project) => (
+            {projectList.map((project) => (
               <div className="col-md-4 mb-4" key={project.slug}>
                 <ProjectCard project={project} extraClass="mb-4" />
               </div>

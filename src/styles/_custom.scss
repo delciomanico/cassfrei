@@ -85,6 +85,343 @@
 	}
 }
 
+// Secção "Nossos Valores" (Home e página Sobre) — simples: fundo cinzento claro, cabeçalho
+// à esquerda e quatro colunas (4 → 2 → 1) com um filete azul no topo, ícone, título e texto.
+// Sem cartões, sombras nem efeitos; a cor da marca só no filete e no ícone.
+.values-section {
+	padding: clamp(56px, 8vw, 110px) 0;
+	background: #f4f6fa;
+
+	&__head {
+		margin-bottom: clamp(32px, 5vw, 56px);
+	}
+
+	&__kicker {
+		display: inline-block;
+		color: $primary;
+		font-weight: 600;
+		letter-spacing: .08em;
+		text-transform: uppercase;
+		font-size: 13px;
+		margin-bottom: 12px;
+	}
+
+	&__title {
+		font-weight: 500;
+		font-size: clamp(30px, 4vw, 48px);
+		line-height: 1.1;
+		margin: 0;
+	}
+
+	&__list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: clamp(28px, 3vw, 40px) clamp(24px, 3vw, 40px);
+		grid-template-columns: 1fr;
+
+		@include media-breakpoint-up(md) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include media-breakpoint-up(lg) {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+}
+
+.values-item {
+	padding-top: 24px;
+	border-top: 2px solid $primary;
+
+	&__icon {
+		display: block;
+		color: $primary;
+		margin-bottom: 16px;
+	}
+
+	&__title {
+		font-size: clamp(19px, 1.6vw, 22px);
+		margin-bottom: 10px;
+	}
+
+	&__text {
+		margin: 0;
+		line-height: 1.7;
+		color: rgba($black, .68);
+	}
+}
+
+// "Rigor Técnico no Terreno" + estatísticas — mesma linguagem simples do "Sobre Nós": fundo
+// claro, foto sem enfeites, texto ao lado e, por baixo, quatro números em azul separados por
+// filetes finos. Sem ícones, selos nem blocos de cor. Empilha em tablet/mobile.
+.field-impact {
+	padding: clamp(56px, 8vw, 110px) 0;
+	background: $white;
+
+	&__split {
+		display: grid;
+		gap: clamp(32px, 6vw, 88px);
+		align-items: center;
+		grid-template-columns: 1fr;
+
+		@include media-breakpoint-up(lg) {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	&__media img {
+		display: block;
+		width: 100%;
+		aspect-ratio: 4 / 3;
+		object-fit: cover;
+		border-radius: 12px;
+	}
+
+	&__kicker {
+		display: inline-block;
+		color: $primary;
+		font-weight: 600;
+		letter-spacing: .08em;
+		text-transform: uppercase;
+		font-size: 13px;
+		margin-bottom: 12px;
+	}
+
+	&__title {
+		font-weight: 500;
+		font-size: clamp(28px, 3.6vw, 44px);
+		line-height: 1.12;
+		margin-bottom: 18px;
+	}
+
+	&__text {
+		font-size: clamp(16px, 1.3vw, 18px);
+		line-height: 1.75;
+		margin-bottom: 22px;
+	}
+
+	&__stats {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		margin-top: clamp(40px, 6vw, 80px);
+		border-top: 1px solid rgba($black, .12);
+
+		@include media-breakpoint-up(lg) {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+}
+
+.stat-tile {
+	padding: clamp(22px, 3vw, 36px) clamp(10px, 2vw, 24px);
+	text-align: center;
+	border-bottom: 1px solid rgba($black, .12);
+
+	&:nth-child(odd) {
+		border-right: 1px solid rgba($black, .12);
+	}
+
+	@include media-breakpoint-up(lg) {
+		border-bottom: 0;
+
+		&,
+		&:nth-child(odd) {
+			border-right: 1px solid rgba($black, .12);
+		}
+
+		&:last-child {
+			border-right: 0;
+		}
+	}
+
+	&__number {
+		display: block;
+		font-size: clamp(40px, 5vw, 64px);
+		font-weight: 400;
+		line-height: 1;
+		color: $primary;
+		font-variant-numeric: tabular-nums;
+		margin-bottom: 10px;
+	}
+
+	&__label {
+		display: block;
+		color: rgba($black, .65);
+		font-size: clamp(13px, 1.1vw, 16px);
+		line-height: 1.4;
+	}
+}
+
+// Secção "Sobre Nós" (Home e página Sobre) — deliberadamente simples: fundo branco, texto à
+// esquerda e uma só foto à direita. Cor só em dois sítios: o rótulo e o botão em azul da
+// marca. Em ecrãs pequenos a foto passa para baixo do texto.
+.about-home {
+	padding: clamp(56px, 8vw, 110px) 0;
+	background: $white;
+
+	&__grid {
+		display: grid;
+		gap: clamp(32px, 6vw, 88px);
+		grid-template-columns: 1fr;
+		align-items: center;
+
+		@include media-breakpoint-up(lg) {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	&__kicker {
+		display: inline-block;
+		color: $primary;
+		font-weight: 600;
+		letter-spacing: .08em;
+		text-transform: uppercase;
+		font-size: 13px;
+		margin-bottom: 12px;
+	}
+
+	&__title {
+		font-weight: 500;
+		font-size: clamp(30px, 4vw, 48px);
+		line-height: 1.1;
+		margin-bottom: 22px;
+	}
+
+	&__subtitle {
+		font-size: clamp(20px, 1.8vw, 24px);
+		margin: 28px 0 10px;
+	}
+
+	&__copy p {
+		font-size: clamp(16px, 1.3vw, 18px);
+		line-height: 1.75;
+		margin-bottom: 18px;
+	}
+
+	&__copy .btn {
+		margin-top: 8px;
+	}
+
+	&__img {
+		display: block;
+		width: 100%;
+		aspect-ratio: 4 / 3;
+		object-fit: cover;
+		border-radius: 12px;
+	}
+}
+
+// Secção "O Que Fazemos" da Home — fundo cinzento claro; cabeçalho alinhado à esquerda com o
+// botão à direita, e uma grelha de mosaicos simples (3 colunas → 2 → 1): fundo branco,
+// filete fino e ícone azul. No hover só a borda e o título passam a azul.
+.what-we-do {
+	padding: clamp(56px, 8vw, 110px) 0;
+	background: #f4f6fa;
+
+	&__head {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 24px;
+		margin-bottom: clamp(32px, 5vw, 60px);
+
+		@include media-breakpoint-up(lg) {
+			flex-direction: row;
+			align-items: flex-end;
+			justify-content: space-between;
+		}
+	}
+
+	&__intro {
+		max-width: 680px;
+	}
+
+	&__kicker {
+		display: inline-block;
+		color: $primary;
+		font-weight: 600;
+		letter-spacing: .08em;
+		text-transform: uppercase;
+		font-size: 13px;
+		margin-bottom: 12px;
+	}
+
+	&__title {
+		font-weight: 500;
+		font-size: clamp(30px, 4vw, 50px);
+		line-height: 1.1;
+		margin-bottom: 14px;
+	}
+
+	&__lead {
+		font-size: clamp(16px, 1.3vw, 18px);
+		line-height: 1.65;
+		margin: 0;
+	}
+
+	&__cta {
+		display: inline-flex;
+		align-items: center;
+		white-space: nowrap;
+	}
+
+	&__grid {
+		display: grid;
+		gap: 16px;
+		grid-template-columns: 1fr;
+
+		@include media-breakpoint-up(md) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include media-breakpoint-up(lg) {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+}
+
+.service-tile {
+	display: flex;
+	flex-direction: column;
+	padding: clamp(24px, 2.6vw, 34px);
+	background: $white;
+	border: 1px solid rgba($black, .1);
+	color: inherit;
+	text-decoration: none;
+	transition: border-color .25s ease;
+
+	&:hover {
+		border-color: $primary;
+		color: inherit;
+		text-decoration: none;
+	}
+
+	&__icon {
+		display: block;
+		color: $primary;
+		margin-bottom: 18px;
+	}
+
+	&__title {
+		font-size: clamp(18px, 1.6vw, 21px);
+		line-height: 1.3;
+		margin-bottom: 10px;
+		transition: color .25s ease;
+	}
+
+	&:hover &__title {
+		color: $primary;
+	}
+
+	&__text {
+		margin: 0;
+		line-height: 1.65;
+		color: rgba($black, .68);
+	}
+}
+
 .institutions-list {
 	list-style: none;
 	padding: 0;
@@ -300,65 +637,298 @@
 	}
 }
 
-// Cartão de formação — reaproveita ".value-card", mas troca o ícone circular por uma foto
-// (ver FormacaoCard.jsx) que sangra até às bordas do cartão. Como ".value-card" já tem
-// padding uniforme (30px/20px) e "border-radius", a foto usa margens negativas para chegar
-// às bordas, e o "overflow:hidden" no cartão corta os cantos da foto para seguirem o
-// arredondamento do próprio cartão, em vez de precisar de um "border-radius" à parte.
-.formacao-card {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding-top: 0;
-	overflow: hidden;
+// Página de Formações ao estilo de plataforma de cursos: introdução e, por baixo, duas
+// colunas — barra lateral (pesquisa, estado com contagens, caixa de ajuda; fixa ao fazer
+// scroll em ecrãs largos) e lista de cursos em linhas. Em tablet/mobile a barra passa para cima
+// e as linhas dos cursos empilham a miniatura sobre o texto.
+.courses {
+	padding: clamp(48px, 7vw, 96px) 0;
+	background: #f4f6fa;
 
-	&__image {
-		width: calc(100% + 40px);
-		height: 160px;
-		margin: 0 -20px 20px;
-		background-size: cover;
-		background-position: center center;
-		background-repeat: no-repeat;
-		flex-shrink: 0;
+	&__intro {
+		max-width: 720px;
+		margin-bottom: clamp(28px, 4vw, 48px);
 	}
 
-	.formacao-modality {
-		font-size: 13px;
-		color: $tertiary;
+	&__kicker {
+		display: inline-block;
+		color: $primary;
+		font-weight: 600;
+		letter-spacing: .08em;
 		text-transform: uppercase;
-		letter-spacing: .04em;
+		font-size: 13px;
 		margin-bottom: 12px;
 	}
-}
 
-.badge-vagas {
-	display: inline-block;
-	padding: 5px 14px;
-	border-radius: 20px;
-	font-size: 12px;
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: .03em;
-
-	&--aberta {
-		background: rgba($secondary, .18);
-		color: darken($secondary, 35%);
+	&__title {
+		font-weight: 500;
+		font-size: clamp(28px, 3.6vw, 44px);
+		line-height: 1.12;
+		margin-bottom: 14px;
 	}
 
-	&--fechada {
-		background: rgba($tertiary, .12);
-		color: $tertiary;
+	&__lead {
+		font-size: clamp(16px, 1.3vw, 18px);
+		line-height: 1.7;
+		margin: 0;
+	}
+
+	&__layout {
+		display: grid;
+		gap: clamp(24px, 3vw, 40px);
+		grid-template-columns: 1fr;
+		align-items: start;
+
+		@include media-breakpoint-up(lg) {
+			grid-template-columns: 290px 1fr;
+		}
+	}
+
+	&__aside {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+
+		@include media-breakpoint-up(lg) {
+			position: sticky;
+			top: calc(var(--nav-height, 58px) + 24px);
+		}
+	}
+
+	&__search {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		margin: 0;
+		padding: 0 16px;
+		height: 48px;
+		border-radius: 10px;
+		background: $white;
+		border: 1px solid rgba($black, .12);
+		color: rgba($black, .5);
+
+		&:focus-within {
+			border-color: $primary;
+			color: $primary;
+		}
+
+		input {
+			flex: 1;
+			min-width: 0;
+			border: 0;
+			outline: 0;
+			background: transparent;
+			font-size: 15px;
+			color: $black;
+		}
+	}
+
+	&__group {
+		margin: 0;
+		padding: 18px;
+		border-radius: 10px;
+		background: $white;
+		border: 1px solid rgba($black, .08);
+
+		legend {
+			float: none;
+			width: auto;
+			margin: 0 0 8px;
+			padding: 0;
+			font-size: 13px;
+			font-weight: 700;
+			letter-spacing: .06em;
+			text-transform: uppercase;
+			color: rgba($black, .55);
+		}
+	}
+
+	&__option {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		margin: 0;
+		padding: 8px 4px;
+		font-size: 15px;
+		cursor: pointer;
+		color: rgba($black, .8);
+
+		input {
+			accent-color: $primary;
+			margin: 0;
+		}
+
+		span {
+			flex: 1;
+		}
+
+		small {
+			font-size: 13px;
+			color: rgba($black, .5);
+		}
+
+		&.is-active {
+			color: $primary;
+			font-weight: 600;
+		}
+	}
+
+	&__help {
+		padding: 20px;
+		border-radius: 10px;
+		background: $primary;
+		color: $white;
+
+		h3 {
+			color: $white;
+			font-size: 18px;
+			margin-bottom: 6px;
+		}
+
+		p {
+			margin-bottom: 14px;
+			font-size: 14px;
+			color: rgba($white, .85);
+		}
+
+		.btn {
+			background: $white;
+			border-color: $white;
+			color: $primary;
+
+			&:hover {
+				background: $secondary;
+				border-color: $secondary;
+			}
+		}
+	}
+
+	&__count {
+		margin: 0 0 14px;
+		font-size: 14px;
+		color: rgba($black, .55);
+	}
+
+	&__list {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(14px, 1.8vw, 22px);
+	}
+
+	&__empty {
+		padding: 48px 0;
+		text-align: center;
+		color: rgba($black, .6);
 	}
 }
 
-// Botão desactivado (inscrições encerradas) — mantém o visual de "btn-primary" mas sem convidar ao clique.
-.formacao-card .btn:disabled {
-	opacity: .5;
-	cursor: not-allowed;
+.course-card {
+	display: grid;
+	grid-template-columns: 1fr;
+	overflow: hidden;
+	border-radius: 12px;
+	background: $white;
+	border: 1px solid rgba($black, .08);
+	transition: box-shadow .25s ease, border-color .25s ease;
 
 	&:hover {
-		background: $primary;
-		border-color: $primary;
+		border-color: rgba($primary, .35);
+		box-shadow: 0 16px 34px -24px rgba(0, 0, 0, .35);
+	}
+
+	@include media-breakpoint-up(md) {
+		grid-template-columns: 260px 1fr;
+	}
+
+	&__thumb {
+		position: relative;
+		min-height: 180px;
+		background-size: cover;
+		background-position: center;
+		background-color: $primary;
+	}
+
+	&__body {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		padding: clamp(18px, 2vw, 26px);
+	}
+
+	&__status {
+		display: inline-block;
+		padding: 4px 12px;
+		margin-bottom: 12px;
+		border-radius: 999px;
+		font-size: 12px;
+		font-weight: 600;
+
+		&.is-open {
+			background: rgba(#17803d, .12);
+			color: #17803d;
+		}
+
+		&.is-closed {
+			background: rgba($black, .07);
+			color: rgba($black, .6);
+		}
+	}
+
+	&__title {
+		font-size: clamp(18px, 1.6vw, 22px);
+		line-height: 1.3;
+		margin-bottom: 8px;
+	}
+
+	&__text {
+		margin-bottom: 16px;
+		line-height: 1.6;
+		color: rgba($black, .68);
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	&__foot {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px 20px;
+		width: 100%;
+		margin-top: auto;
+		padding-top: 14px;
+		border-top: 1px solid rgba($black, .08);
+	}
+
+	&__meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px 16px;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		font-size: 13px;
+		color: rgba($black, .6);
+
+		li {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+		}
+	}
+
+	&__btn {
+		&:disabled {
+			opacity: .5;
+			cursor: not-allowed;
+
+			&:hover {
+				background: $primary;
+				border-color: $primary;
+			}
+		}
 	}
 }
 
@@ -567,175 +1137,164 @@
 	}
 }
 
+@keyframes hero-zoom-in {
+	from { transform: scale(1); }
+	to { transform: scale(1.18); }
+}
+
+@keyframes hero-text-in {
+	from { opacity: 0; transform: translateX(80px); }
+	to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes hero-text-out {
+	from { opacity: 1; }
+	to { opacity: 0; }
+}
+
+@keyframes hero-fade-in {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
 .hero-glass {
 	position: relative;
-	min-height: 100vh;
+	// Ecrã completo menos a nav (que agora é sempre branca e reserva o seu espaço no topo).
+	min-height: calc(100vh - var(--nav-height, 58px));
+	min-height: calc(100svh - var(--nav-height, 58px));
 	display: flex;
 	align-items: center;
 	overflow: hidden;
-	background-size: cover;
-	background-position: center center;
-	background-repeat: no-repeat;
 
-	@include media-breakpoint-up(md) {
-		min-height: 560px;
+	// Camada da foto separada da secção para poder animar o zoom sem afectar o conteúdo.
+	// Zoom in lento e contínuo (de 1 a 1.15); respeita "reduzir movimento".
+	&__bg {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		background-size: cover;
+		background-position: center center;
+		background-repeat: no-repeat;
+		transform-origin: center center;
+		will-change: transform;
 	}
 
-	// Escurece a foto inteira, para o texto branco manter contraste também fora do painel
-	// de vidro (que já tem o seu próprio escurecimento, mais forte, a seguir).
-	&__shade {
+	// Overlay azul sólido em gradiente da esquerda para a direita (sem desfoque nem vidro,
+	// para combinar com o resto do site): mais denso à esquerda, onde está o texto, e
+	// totalmente transparente à direita, deixando ver a foto.
+	&__overlay {
 		position: absolute;
 		inset: 0;
 		z-index: 1;
-		background: rgba($black, .35);
-	}
-
-	// O corte diagonal em vidro fosco: cobre metade da secção (o lado esquerdo, oposto ao
-	// bloco de texto e botões, que fica no lado direito — ver Home.jsx), com a borda direita
-	// cortada na diagonal — não é só uma faixa fina, é mesmo um painel largo, como no hero de
-	// referência. "backdrop-filter" desfoca a foto por trás (o efeito "vidrado" propriamente
-	// dito) e o gradiente azul por cima dá profundidade.
-	&__pane {
-		position: absolute;
-		inset: 0;
-		z-index: 2;
-		clip-path: polygon(0 0, 42% 0, 62% 100%, 0 100%);
-		background: linear-gradient(135deg, rgba($primary, .5), rgba(darken($primary, 25%), .82));
-		backdrop-filter: blur(14px) saturate(140%);
-		-webkit-backdrop-filter: blur(14px) saturate(140%);
-		border-right: 1px solid rgba($white, .3);
+		background: linear-gradient(to right,
+			rgba(darken($primary, 24%), .94) 0%,
+			rgba(darken($primary, 14%), .86) 35%,
+			rgba($primary, .45) 62%,
+			rgba($primary, 0) 88%);
 
 		@include media-breakpoint-down(sm) {
-			display: none;
+			background: linear-gradient(to right,
+				rgba(darken($primary, 24%), .92) 0%,
+				rgba(darken($primary, 14%), .82) 70%,
+				rgba($primary, .5) 100%);
+		}
+	}
+
+	// Cada slide = foto + overlay + texto. A foto nova entra em fade in por cima da anterior;
+	// o overlay acompanha a foto (também em fade in, sem deslizar) e só o texto novo entra pela direita. O slide anterior ("is-leaving") fica
+	// parado por baixo até ser coberto, e depois fica escondido à espera da vez seguinte.
+	&__slide {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		display: flex;
+		align-items: center;
+		visibility: hidden;
+		transition: visibility 0s linear 1.8s;
+
+		&.is-leaving {
+			z-index: 2;
+			visibility: visible;
+		}
+
+		&.is-active {
+			z-index: 3;
+			visibility: visible;
+			transition: none;
+
+			.hero-glass__content {
+				animation: hero-text-in 1s .6s cubic-bezier(.22, 1, .36, 1) both;
+			}
+
+			.hero-glass__overlay {
+				animation: hero-fade-in 1.6s ease-in-out both;
+			}
+		}
+
+		.hero-glass__container {
+			width: 100%;
+		}
+
+		// Cada slide traz a sua própria foto (opaca), por isso ao entrar cobre o anterior por
+		// completo — nada do slide antigo se vê por baixo.
+		&.is-active .hero-glass__bg {
+			animation: hero-zoom-in 16s linear forwards, hero-fade-in 1.6s ease-in-out both;
+		}
+
+		&.is-leaving .hero-glass__bg {
+			animation: hero-zoom-in 16s linear forwards;
+		}
+
+		// O texto do slide que sai desvanece logo, antes de ser coberto.
+		&.is-leaving .hero-glass__content {
+			animation: hero-text-out .6s ease-in both;
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			transition: none;
+
+			.hero-glass__content,
+			.hero-glass__bg,
+			.hero-glass__overlay {
+				animation: none !important;
+			}
 		}
 	}
 
 	&__container {
 		position: relative;
-		z-index: 3;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 24px;
-
-		@include media-breakpoint-down(sm) {
-			flex-direction: column;
-			text-align: center;
-			gap: 36px;
-			padding-top: 40px;
-			padding-bottom: 40px;
-		}
+		z-index: 2;
+		padding-top: 40px;
+		padding-bottom: 40px;
 	}
 
-	&__side {
-		flex: 1;
-		min-width: 0;
-
-		// Só tem o título "A Solução" (ver Home.jsx) — empurrado até à ponta deste lado,
-		// para ficar próximo do emblema central, tal como o bloco de texto do lado oposto.
-		&--right {
-			display: flex;
-			justify-content: flex-start;
-
-			@include media-breakpoint-down(sm) {
-				justify-content: center;
-				text-align: center;
-			}
-		}
+	&__content {
+		max-width: min(720px, 90vw);
 	}
 
+	// Tamanhos fluidos: crescem com a largura do ecrã (clamp = mínimo, ideal, máximo).
 	&__kicker {
 		display: inline-block;
 		color: $secondary;
 		font-weight: 600;
+		font-size: clamp(16px, 1.4vw, 22px);
 		letter-spacing: .03em;
-		margin-bottom: 14px;
+		margin-bottom: 16px;
 	}
 
 	&__title {
 		color: $white;
-		font-weight: 300;
-		font-size: 48px;
-		line-height: 1.1;
-		margin-bottom: 18px;
-
-		@include media-breakpoint-down(md) {
-			font-size: 34px;
-		}
-
-		@include media-breakpoint-down(sm) {
-			font-size: 30px;
-			margin-bottom: 10px;
-		}
+		font-weight: 400;
+		font-size: clamp(40px, 5.5vw, 88px);
+		line-height: 1.05;
+		margin-bottom: 24px;
 	}
 
 	&__text {
-		color: rgba($white, .9);
-		max-width: 420px;
+		color: rgba($white, .95);
+		font-size: clamp(17px, 1.6vw, 26px);
+		line-height: 1.6;
 		margin-bottom: 0;
-	}
-
-	// Emblema circular de vidro, centrado sobre a linha diagonal do painel — mesmo princípio
-	// visual do "&" em destaque no hero de referência, aqui com um ícone de bússola (mais
-	// adequado a uma empresa de cartografia/gestão territorial).
-	&__emblem {
-		position: relative;
-		z-index: 4;
-		flex: 0 0 auto;
-		width: 84px;
-		height: 84px;
-		border-radius: 50%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background: rgba($white, .14);
-		border: 1px solid rgba($white, .5);
-		backdrop-filter: blur(6px);
-		-webkit-backdrop-filter: blur(6px);
-		box-shadow: 0 10px 30px rgba($black, .25);
-
-		svg {
-			width: 38px;
-			height: 38px;
-			color: $white;
-			stroke-width: 1.5;
-		}
-
-		@include media-breakpoint-down(sm) {
-			width: 64px;
-			height: 64px;
-
-			svg {
-				width: 28px;
-				height: 28px;
-			}
-		}
-	}
-
-	&__btn {
-		backdrop-filter: blur(4px);
-		-webkit-backdrop-filter: blur(4px);
-
-		&--solid {
-			background: rgba($white, .95);
-			border-color: rgba($white, .95);
-			color: $primary;
-
-			&:hover {
-				background: $white;
-				border-color: $white;
-			}
-		}
-
-		&--outline {
-			background: rgba($white, .08);
-			border: 1px solid rgba($white, .7);
-			color: $white;
-
-			&:hover {
-				background: rgba($white, .18);
-			}
-		}
 	}
 }
 
@@ -764,12 +1323,15 @@
 	// deixando o hero por trás ler-se através da nav. Qualquer scroll, por pequeno que seja,
 	// tira esta classe (ver Navbar.jsx) e a nav volta ao estado branco normal acima.
 	&.is-transparent {
-		background: transparent !important;
+		// Gradiente escuro subtil atrás da nav para dar contraste ao texto sobre a foto.
+		background: linear-gradient(to bottom, rgba($black, .45), rgba($black, 0)) !important;
 		box-shadow: none;
 
 		.navbar-brand,
 		.nav-link {
 			color: $white !important;
+			font-weight: 700;
+			text-shadow: 0 1px 4px rgba($black, .6);
 		}
 
 		.nav-link:hover {
@@ -793,23 +1355,6 @@
 			&:focus {
 				background: rgba($white, .24);
 			}
-		}
-
-		// O ficheiro do logótipo (src/assets/logo.png) tem fundo branco "queimado" na própria
-		// imagem, não transparente — sobre a nav transparente isso criava um rectângulo branco
-		// cru, destacado, sem relação com o resto do hero vidrado. Em vez disso, o logótipo
-		// ganha a mesma linguagem visual dos outros elementos de vidro da secção (emblema,
-		// botões): uma pílula translúcida com desfoque, para o branco do ficheiro se fundir
-		// no vidro em vez de se destacar como um autocolante por cima da foto.
-		.brand-logo {
-			background: rgba($white, .22);
-			border: 1px solid rgba($white, .4);
-			border-radius: 999px;
-			padding: 3px 12px 3px 6px;
-			margin-right: 10px;
-			backdrop-filter: blur(6px);
-			-webkit-backdrop-filter: blur(6px);
-			box-shadow: 0 8px 20px -8px rgba($black, .4);
 		}
 	}
 
@@ -1160,109 +1705,257 @@ textarea:focus-visible,
 	}
 }
 
-// Blog: cartão da lista (BlogCard.jsx) e artigo (BlogPost.jsx) — o template original usava
-// uma barra grossa colorida à volta do cartão e um selo de data sobreposto na foto (".text",
-// ".meta-date" em main.scss); substituído por um cartão mais limpo com imagem no topo, badge
-// de categoria e meta (data/tempo de leitura) com ícones lucide, ao mesmo nível visual dos
-// outros cartões do site (".value-card", ".formacao-card").
-.blog-entry {
-	border: none;
+// Blog em formato de página de notícias: barra de título com filtros por categoria, uma
+// manchete grande (foto + título em destaque) e uma lista de "Mais notícias" em linhas
+// compactas com miniatura. Funciona bem com poucas notícias: com apenas uma, fica só a manchete.
+.news {
+	padding: clamp(40px, 6vw, 80px) 0;
 	background: $white;
-	border-radius: 8px;
-	overflow: hidden;
-	box-shadow: 0px 5px 18px -9px rgba(0, 0, 0, .14);
-	@include transition(.3s);
-	margin-bottom: 30px;
-	height: calc(100% - 30px);
-	display: flex;
-	flex-direction: column;
 
-	&:hover {
-		transform: translateY(-4px);
-		box-shadow: 0px 12px 28px -10px rgba(0, 0, 0, .22);
+	&--social {
+		background: #f4f6fa;
 	}
 
-	&__media {
-		display: block;
-		height: 200px;
-		background-size: cover;
-		background-position: center center;
-		background-repeat: no-repeat;
-		position: relative;
-	}
-
-	&__media-link {
-		position: absolute;
-		inset: 0;
-	}
-
-	&__tag {
-		pointer-events: none;
-		position: absolute;
-		top: 14px;
-		left: 14px;
-		background: $primary;
-		color: $white;
-		font-size: 11px;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: .04em;
-		padding: 4px 12px;
-		border-radius: 20px;
-	}
-
-	&__body {
-		padding: 24px;
+	&__bar {
 		display: flex;
 		flex-direction: column;
-		flex: 1;
+		gap: 14px;
+		padding-bottom: 14px;
+		margin-bottom: clamp(22px, 3vw, 32px);
+		border-bottom: 2px solid $black;
+	}
+
+	&__heading {
+		font-size: clamp(22px, 2.4vw, 30px);
+		font-weight: 600;
+		margin: 0;
+
+		&--sub {
+			margin: clamp(36px, 5vw, 56px) 0 clamp(18px, 2.5vw, 26px);
+			padding-bottom: 12px;
+			border-bottom: 2px solid $black;
+		}
+	}
+
+	// Uma só linha com scroll horizontal: com muitas categorias não cresce em altura nem
+	// parte o cabeçalho. A barra de scroll fica escondida; o desvanecer à direita sugere mais.
+	&__filters {
+		display: flex;
+		gap: 8px;
+		overflow-x: auto;
+		scrollbar-width: none;
+		-webkit-overflow-scrolling: touch;
+		padding-bottom: 2px;
+		-webkit-mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+		mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+
+	&__chip {
+		flex: 0 0 auto;
+		white-space: nowrap;
+		padding: 7px 16px;
+		border-radius: 999px;
+		border: 1px solid rgba($black, .18);
+		background: transparent;
+		font-size: 14px;
+		font-weight: 500;
+		color: rgba($black, .75);
+		cursor: pointer;
+		transition: all .2s ease;
+
+		&:hover {
+			border-color: $primary;
+			color: $primary;
+		}
+
+		&.is-active {
+			background: $primary;
+			border-color: $primary;
+			color: $white;
+		}
+	}
+
+	&__list {
+		display: grid;
+		gap: clamp(20px, 2.5vw, 32px) clamp(24px, 4vw, 56px);
+		grid-template-columns: 1fr;
+
+		@include media-breakpoint-up(lg) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	&__more {
+		display: flex;
+		justify-content: center;
+		margin-top: clamp(28px, 4vw, 44px);
+	}
+
+	&__empty {
+		padding: 48px 0;
+		text-align: center;
+		color: rgba($black, .6);
+	}
+}
+
+.news-pager {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 6px;
+	margin-top: clamp(28px, 4vw, 44px);
+
+	&__btn {
+		min-width: 40px;
+		height: 40px;
+		padding: 0 10px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 8px;
+		border: 1px solid rgba($black, .15);
+		background: $white;
+		font-size: 15px;
+		font-weight: 500;
+		color: rgba($black, .8);
+		cursor: pointer;
+		transition: all .2s ease;
+
+		&:hover:not(:disabled) {
+			border-color: $primary;
+			color: $primary;
+		}
+
+		&.is-active {
+			background: $primary;
+			border-color: $primary;
+			color: $white;
+		}
+
+		&:disabled {
+			opacity: .4;
+			cursor: not-allowed;
+		}
+	}
+
+	&__gap {
+		min-width: 24px;
+		text-align: center;
+		color: rgba($black, .5);
+	}
+}
+
+.news-item {
+	&__media {
+		display: block;
+		overflow: hidden;
+		border-radius: 6px;
+		background: #e6e9f0;
+
+		img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			transition: transform .5s ease;
+		}
+	}
+
+	&:hover &__media img {
+		transform: scale(1.04);
 	}
 
 	&__meta {
 		display: flex;
-		gap: 16px;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 4px 14px;
+		margin-bottom: 10px;
 		font-size: 13px;
-		color: $tertiary;
-		margin-bottom: 12px;
+		color: rgba($black, .55);
+	}
 
-		span {
-			display: inline-flex;
-			align-items: center;
-			gap: 5px;
-		}
+	&__tag {
+		max-width: 100%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		color: $primary;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: .06em;
+		font-size: 12px;
+	}
+
+	&__read {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
 	}
 
 	&__title {
-		font-size: 19px;
-		margin-bottom: 10px;
+		line-height: 1.25;
+		margin: 0;
+		overflow-wrap: anywhere;
 
 		a {
 			color: $black;
-			@include transition(.2s);
+			transition: color .2s ease;
 
 			&:hover {
 				color: $primary;
+				text-decoration: none;
 			}
 		}
 	}
 
-	&__excerpt {
-		color: $tertiary;
-		font-size: 15px;
-		flex: 1;
+	// Manchete: foto à esquerda, título grande à direita (empilha em ecrãs pequenos).
+	&--lead {
+		display: grid;
+		gap: clamp(20px, 3.5vw, 48px);
+		grid-template-columns: 1fr;
+		align-items: center;
+
+		@include media-breakpoint-up(lg) {
+			grid-template-columns: 1.4fr 1fr;
+		}
+
+		.news-item__media {
+			aspect-ratio: 16 / 10;
+		}
+
+		.news-item__title {
+			font-size: clamp(26px, 3.2vw, 40px);
+			font-weight: 600;
+			margin-bottom: 14px;
+		}
+
+		.news-item__excerpt {
+			display: -webkit-box;
+			-webkit-line-clamp: 5;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+			font-size: clamp(16px, 1.3vw, 18px);
+			line-height: 1.7;
+			color: rgba($black, .7);
+			margin-bottom: 18px;
+		}
 	}
 
 	&__cta {
 		display: inline-flex;
 		align-items: center;
 		gap: 6px;
-		margin-top: 16px;
 		font-weight: 700;
 		color: $primary;
-		@include transition(.2s);
 
 		svg {
-			@include transition(.2s);
+			transition: transform .2s ease;
 		}
 
 		&:hover {
@@ -1270,8 +1963,33 @@ textarea:focus-visible,
 			text-decoration: none;
 
 			svg {
-				transform: translateX(3px);
+				transform: translateX(4px);
 			}
+		}
+	}
+
+	// Linha compacta: miniatura quadrada à esquerda, texto à direita.
+	&--row {
+		display: grid;
+		gap: 18px;
+		grid-template-columns: 120px 1fr;
+		align-items: start;
+
+		@include media-breakpoint-up(sm) {
+			grid-template-columns: 180px 1fr;
+		}
+
+		.news-item__media {
+			aspect-ratio: 4 / 3;
+		}
+
+		.news-item__title {
+			font-size: clamp(17px, 1.5vw, 20px);
+			font-weight: 600;
+			display: -webkit-box;
+			-webkit-line-clamp: 3;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
 		}
 	}
 }
@@ -1346,4 +2064,390 @@ textarea:focus-visible,
 			transform: scale(1.03);
 		}
 	}
+}
+
+// Fotos e vídeos: miniatura (MediaTile.jsx), montra "Em acção" da Home e grelha da Galeria.
+// A miniatura é um botão com a capa, um play nos vídeos e a legenda por cima, num gradiente
+// escuro no fundo. O vídeo abre na lightbox (iframe do YouTube ou <video>).
+.media-tile {
+	position: relative;
+	display: block;
+	width: 100%;
+	padding: 0;
+	border: 0;
+	overflow: hidden;
+	background: #1a2a44;
+	cursor: pointer;
+	text-align: left;
+	aspect-ratio: 4 / 3;
+
+	img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform .5s ease;
+	}
+
+	&:hover img {
+		transform: scale(1.05);
+	}
+
+	&__play {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 60px;
+		height: 60px;
+		transform: translate(-50%, -50%);
+		background: $primary;
+		color: $white;
+		transition: background .25s ease, transform .25s ease;
+	}
+
+	&:hover &__play {
+		background: $secondary;
+		color: darken($primary, 25%);
+		transform: translate(-50%, -50%) scale(1.08);
+	}
+
+	&__caption {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		padding: 36px 16px 14px;
+		color: $white;
+		font-size: 14px;
+		line-height: 1.35;
+		background: linear-gradient(to top, rgba(0, 0, 0, .75), transparent);
+
+		small {
+			display: block;
+			margin-bottom: 2px;
+			color: $secondary;
+			font-size: 11px;
+			font-weight: 700;
+			letter-spacing: .06em;
+			text-transform: uppercase;
+		}
+	}
+
+	&--feature &__play {
+		width: 76px;
+		height: 76px;
+	}
+
+	&--feature &__caption {
+		font-size: clamp(15px, 1.4vw, 18px);
+		padding: 56px 22px 20px;
+	}
+}
+
+.showcase {
+	padding: clamp(56px, 8vw, 110px) 0;
+	background: $white;
+
+	&__head {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 20px;
+		margin-bottom: clamp(28px, 4vw, 48px);
+
+		@include media-breakpoint-up(lg) {
+			flex-direction: row;
+			align-items: flex-end;
+			justify-content: space-between;
+		}
+	}
+
+	&__kicker {
+		display: inline-block;
+		color: $primary;
+		font-weight: 600;
+		letter-spacing: .08em;
+		text-transform: uppercase;
+		font-size: 13px;
+		margin-bottom: 12px;
+	}
+
+	&__title {
+		font-weight: 500;
+		font-size: clamp(28px, 3.6vw, 46px);
+		line-height: 1.1;
+		margin: 0;
+	}
+
+	&__cta {
+		display: inline-flex;
+		align-items: center;
+		white-space: nowrap;
+	}
+
+	// 1 coluna em mobile; em tablet 2 colunas com o destaque a toda a largura; em ecrãs
+	// largos o destaque ocupa 2×2 à esquerda e as outras quatro formam uma grelha 2×2 à direita.
+	&__grid {
+		display: grid;
+		gap: 12px;
+		grid-template-columns: 1fr;
+
+		@include media-breakpoint-up(sm) {
+			grid-template-columns: repeat(2, 1fr);
+
+			.media-tile--feature {
+				grid-column: 1 / -1;
+			}
+		}
+
+		@include media-breakpoint-up(lg) {
+			grid-template-columns: repeat(4, 1fr);
+			grid-template-rows: repeat(2, 1fr);
+
+			.media-tile--feature {
+				grid-column: 1 / span 2;
+				grid-row: 1 / span 2;
+				aspect-ratio: auto;
+				min-height: 100%;
+			}
+		}
+	}
+}
+
+.media-page {
+	padding: clamp(40px, 6vw, 80px) 0;
+	background: $white;
+
+	&__bar {
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+		padding-bottom: 14px;
+		margin-bottom: clamp(22px, 3vw, 32px);
+		border-bottom: 2px solid $black;
+	}
+
+	&__heading {
+		font-size: clamp(22px, 2.4vw, 30px);
+		font-weight: 600;
+		margin: 0;
+	}
+
+	// Uma só linha com scroll horizontal: aguenta muitas categorias sem crescer em altura.
+	&__filters {
+		display: flex;
+		gap: 8px;
+		overflow-x: auto;
+		scrollbar-width: none;
+		padding-bottom: 2px;
+		-webkit-mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+		mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+
+	&__chip {
+		flex: 0 0 auto;
+		white-space: nowrap;
+		padding: 7px 16px;
+		border: 1px solid rgba($black, .18);
+		background: transparent;
+		font-size: 14px;
+		font-weight: 500;
+		color: rgba($black, .75);
+		cursor: pointer;
+		transition: all .2s ease;
+
+		&:hover {
+			border-color: $primary;
+			color: $primary;
+		}
+
+		&.is-active {
+			background: $primary;
+			border-color: $primary;
+			color: $white;
+		}
+	}
+
+	&__grid {
+		display: grid;
+		gap: 12px;
+		grid-template-columns: 1fr;
+
+		@include media-breakpoint-up(sm) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include media-breakpoint-up(lg) {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+}
+
+// Vídeo incorporado na lightbox (YouTube) — proporção 16:9 que cabe no ecrã.
+.lightbox-video {
+	position: relative;
+	width: min(90vw, 960px);
+	aspect-ratio: 16 / 9;
+
+	iframe {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
+}
+
+.lightbox-content video {
+	display: block;
+	max-width: 90vw;
+	max-height: 80vh;
+}
+
+// Página "O Que Fazemos": dois grupos de serviços (consultoria / estudos), cada um com o
+// título à esquerda (fixo ao fazer scroll em ecrãs largos) e a lista em linhas à direita,
+// mais uma faixa final de contacto. Em tablet/mobile o título passa para cima da lista.
+.service-group {
+	padding: clamp(48px, 7vw, 96px) 0;
+	background: $white;
+
+	&--alt {
+		background: #f4f6fa;
+	}
+
+	&__grid {
+		display: grid;
+		gap: clamp(24px, 5vw, 72px);
+		grid-template-columns: 1fr;
+		align-items: start;
+
+		@include media-breakpoint-up(lg) {
+			grid-template-columns: 1fr 1.7fr;
+		}
+	}
+
+	&__intro {
+		@include media-breakpoint-up(lg) {
+			position: sticky;
+			top: calc(var(--nav-height, 58px) + 24px);
+		}
+	}
+
+	&__kicker {
+		display: inline-block;
+		color: $primary;
+		font-weight: 600;
+		letter-spacing: .08em;
+		text-transform: uppercase;
+		font-size: 13px;
+		margin-bottom: 12px;
+	}
+
+	&__title {
+		font-weight: 500;
+		font-size: clamp(26px, 3.2vw, 40px);
+		line-height: 1.15;
+		margin-bottom: 14px;
+	}
+
+	&__text {
+		font-size: clamp(16px, 1.3vw, 18px);
+		line-height: 1.7;
+		margin-bottom: 14px;
+	}
+
+	&__count {
+		font-size: 14px;
+		color: rgba($black, .55);
+	}
+
+	&__list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		border-top: 1px solid rgba($black, .14);
+	}
+}
+
+.service-row {
+	display: grid;
+	grid-template-columns: 28px 1fr;
+	gap: 18px;
+	padding: clamp(18px, 2vw, 26px) 0;
+	border-bottom: 1px solid rgba($black, .14);
+
+	&__icon {
+		color: $primary;
+		margin-top: 2px;
+	}
+
+	&__title {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 4px 10px;
+		font-size: clamp(17px, 1.5vw, 20px);
+		line-height: 1.3;
+		margin-bottom: 6px;
+	}
+
+	&__abbr {
+		padding: 2px 8px;
+		border: 1px solid rgba($primary, .4);
+		color: $primary;
+		font-size: 11px;
+		font-weight: 700;
+		letter-spacing: .06em;
+	}
+
+	&__text {
+		margin: 0;
+		line-height: 1.65;
+		color: rgba($black, .68);
+	}
+}
+
+.services-cta {
+	padding: clamp(36px, 5vw, 56px) 0;
+	background: $primary;
+	color: $white;
+
+	&__inner {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 20px;
+
+		@include media-breakpoint-up(md) {
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+		}
+	}
+
+	&__title {
+		color: $white;
+		font-size: clamp(22px, 2.4vw, 32px);
+		margin-bottom: 6px;
+	}
+
+	&__text {
+		margin: 0;
+		color: rgba($white, .85);
+	}
+}
+
+// Todo o site com cantos rectos (sem arredondados): cartões, botões, fotos, filtros, etc.
+// Fica no fim do ficheiro para valer sobre qualquer regra anterior, incluindo as do template.
+*,
+*::before,
+*::after {
+	border-radius: 0 !important;
 }

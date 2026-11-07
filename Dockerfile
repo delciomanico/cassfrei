@@ -6,6 +6,15 @@ COPY package.json package-lock.json ./
 RUN npm ci
 
 COPY . .
+
+# Ligação ao Dynamix-CMS — variáveis do Vite, lidas em build-time (ver docs/dynamix.md).
+# Sem elas usa-se o defeito do código (https://dynamix.cassfrei.com/api/v1, projecto "cassfrei").
+ARG VITE_DYNAMIX_API_URL
+ARG VITE_DYNAMIX_PROJECT
+ARG VITE_DYNAMIX_DISABLED
+ENV VITE_DYNAMIX_API_URL=$VITE_DYNAMIX_API_URL \
+    VITE_DYNAMIX_PROJECT=$VITE_DYNAMIX_PROJECT \
+    VITE_DYNAMIX_DISABLED=$VITE_DYNAMIX_DISABLED
 RUN npm run build
 
 # ---- runtime: serve os ficheiros estáticos gerados ----

@@ -32,7 +32,7 @@ function InstagramEmbed({ url, caption }) {
       className="instagram-media"
       data-instgrm-permalink={url}
       data-instgrm-version="14"
-      style={{ background: '#fff', border: 0, borderRadius: 4, margin: '0 auto', maxWidth: 540, width: '100%' }}
+      style={{ background: '#fff', border: 0, margin: '0 auto', maxWidth: 540, width: '100%' }}
     >
       <a href={url} target="_blank" rel="noreferrer">{caption || 'Ver publicação no Instagram'}</a>
     </blockquote>
